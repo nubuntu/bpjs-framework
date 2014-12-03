@@ -7,7 +7,7 @@ $config = (object)[
 		"driver"   => "mysql",
 		"host"     => "localhost",
 		"username" => "root",
-		"password" => "291841",
+		"password" => "",
 		"name"     => "demo"
 	],
 	"template" => "sb-admin-2"
