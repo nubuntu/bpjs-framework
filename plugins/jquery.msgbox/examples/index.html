@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+	<title>jquery.msgbox examples</title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" id="theme" type="text/css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../jquery.msgbox.i18n.js"></script>
+	<script type="text/javascript" src="../jquery.msgbox.js"></script>
+
+	<style type="text/css">
+	* {font-family: Arial; font-size: 12px;}
+	pre {
+		font-family: monospace, consolas;
+		font-size: 12px;
+		border: 1px solid #333;
+		width: 550px;
+		padding: 12px;
+		background-color: #ddd;
+	}
+	body {width: 688px;}
+	h1 {font-size: 24px;}
+	h2 {font-size: 20px;}
+	h3.title {font-size: 16px; margin: 0px;}
+	.wrap {background-color: #eee; padding: 8px ; margin-bottom: 10px;}
+	.msgbox {text-decoration: none; background-color:#f33; display: inline-block; margin-bottom: 6px; padding: 4px 6px; color:#fff;}
+	.comment {padding-top: 6px;}
+	</style>
+	
+	<script type="text/javascript">
+	var theme = location.href.split(/\?/)[1];
+	theme = theme || 'metro';
+	$("#theme").attr('href', "../themes/"+ theme +"/css/jquery.msgbox.css");
+	
+	$ (document) .ready(function(){
+		var produce = function () {
+			$("pre.code").each (function(){
+				eval ($(this).text());
+			});
+		}
+		
+		$("#themeswitcher").val(theme);
+		
+		produce();
+		
+		$("#themeswitcher").change(function(){
+			location.href = location.href.split(/\?/)[0] + '?' + $(this).val();
+		});
+	});
+	</script>
+</head>
+<body>
+	<h1>jquery.msgbox examples <a href="../index.html">Back to jquery.msgbox home</a></h1>
+	<div>Switch msgbox theme: <select id="themeswitcher">
+		<option value="bootstrap">bootstrap</option>
+		<option value="black">black</option>
+		<option value="mac">mac</option>
+		<option value="jqueryui">jqueryui</option>
+		<option value="metro">metro</option>
+		<option value="naked">naked</option>
+		<option value="facebook">facebook</option>
+
+	</select></div>
+	<h2>Initialization</h2>
+	
+	<div class="wrap">
+		<h3 class="title">Basic usage</h3>
+		<div class="comment">No arguments is required for jquery.msgbox, however,
+		you have to pass an ampty object {} to either $.msgbox or $(...).msgbox.
+		Because $.msgbox() and $(...).msgbox() are used to retrieve msgbox objects</div>
+		<pre class="code">
+$(".msgbox.defaultmsg").msgbox({});
+$(".msgbox.basic").msgbox({
+	content: 'Hello world',
+	padding: 12
+});
+</pre>
+		<div class="trigger">
+			<a href="javascript:;" class="msgbox basic">Open basic msgbox</a>
+			<a href="javascript:;" class="msgbox defaultmsg">Open default msgbox</a>
+		</div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Alert/Info/Warning/Error/Success</h3>
+		<div class="comment">These are shortcuts. You can add different style width selector .jMsgbox-alert .jMsgbox-loaded <br />
+		To replace window.alert width jquery.msgbox alert shortcut: <br />
+		<pre>
+var _alert = window.alert;
+window.alert = function (msg) {
+	$.msgbox({type:'alert', content: msg});
+};
+window.alert('Something');
+// recover original alert
+window.alert = _alert;
+</pre>
+		</div>
+		<pre class="code">
+$(".msgbox.alert").msgbox({
+	type: 'alert',
+	content: 'This is an alert!',
+	title: 'Alert'
+});
+$(".msgbox.info").msgbox({
+	type: 'info',
+	content: 'This is an info!',
+	title: 'Info'
+});
+$(".msgbox.warning").msgbox({
+	type: 'warning',
+	content: 'This is a warning!',
+	title: 'Warning'
+});
+$(".msgbox.error").msgbox({
+	type: 'error',
+	content: 'This is an error!',
+	title: 'Error'
+});
+$(".msgbox.success").msgbox({
+	type: 'success',
+	content: 'This is a success!',
+	title: 'Success'
+});</pre>
+		<div class="trigger">
+			<a href="javascript:;" class="msgbox alert">Open alert msgbox</a>
+			<a href="javascript:;" class="msgbox info">Open info msgbox</a>
+			<a href="javascript:;" class="msgbox warning">Open warning msgbox</a>
+			<a href="javascript:;" class="msgbox error">Open error msgbox</a>
+			<a href="javascript:;" class="msgbox success">Open success msgbox</a>
+		</div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Confirm</h3>
+		<pre class="code">
+$(".msgbox.confirm").msgbox({
+	type: 'confirm',
+	content: 'This is a confirm ?',
+	title: 'Confirm',
+	onClose: function(){
+		alert('You clicked: ' + (this.val() ? 'OK' : 'Cancel'));
+	}
+});</pre>
+		<div class="trigger"><a href="javascript:;" class="msgbox confirm">Open msgbox</a></div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Prompt</h3>
+		<pre class="code">
+$(".msgbox.prompt").msgbox({
+	type: 'prompt',
+	content: 'Please input: ',
+	title: 'Input a value',
+	onClose: function(){
+		if (this.val() === undefined) alert('You cancelled');
+		else alert('You entered: ' + this.val());
+	}
+});</pre>
+		<div class="trigger"><a href="javascript:;" class="msgbox prompt">Open msgbox</a></div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Photo/Album</h3>
+		<pre class="code">
+$(".msgbox.photo").msgbox({
+	type: 'photo',
+	photoScaled: true
+});
+$(".msgbox.album").msgbox({
+	type: 'album'
+});
+</pre>
+		<div class="trigger">
+			<a href="images/sky1.jpg" title="Sky 1" class="msgbox photo">Open single photo</a>
+			<a href="images/sky1.jpg" title="Sky 1" class="msgbox album">Open photo 1 (album)</a>
+			<a href="images/sky2.jpg" title="Sky 2" class="msgbox album">Open photo 2 (album)</a>
+			<a href="images/sky3.jpg" title="Sky 3" class="msgbox album">Open photo 3 (album)</a>
+			<a href="images/sky4.jpg" title="Sky 4" class="msgbox album">Open photo 4 (album)</a>
+		</div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Ajax</h3>
+		<div class="comment">If you run this file as a local file, nothing will be loaded. You need a server to use this function. </div>
+		<pre class="code">
+$(".msgbox.ajax").msgbox({
+	type: 'ajax',
+	title: 'Ajax'
+});</pre>
+		<div class="trigger"><a href="sub.html" class="msgbox ajax">Open msgbox</a></div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Iframe</h3>
+		<pre class="code">
+$(".msgbox.iframe").msgbox({
+	type: 'iframe'
+});</pre>
+		<div class="trigger"><a href="http://jmsgbox.com" class="msgbox iframe">Open msgbox</a></div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Fixed/Non-fixed msgbox</h3>
+		<pre class="code">
+$(".msgbox.fixed").msgbox({
+	content: 'Fixed msgbox',
+	fixed: true
+});
+$(".msgbox.nonfixed").msgbox({
+	content: 'Non-fixed msgbox',
+	fixed: false
+});</pre>
+		<div class="trigger"><a href="javascript:;" class="msgbox fixed">Open fixed msgbox</a> <a href="javascript:;" class="msgbox nonfixed">Open non-fixed msgbox</a></div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Change default settings</h3>
+		<div class="comment">Change the default settings:<br />
+		Change the overlay click event to 'close' (default: 'flash') <br />
+		Resize button (bottom right) not available any more<br />
+		Change langauge to Simplifed Chinese</div>
+		<pre class="code">
+$.msgbox.defaults({
+	overlayEvent: 'close',
+	resize: false,
+	lang: 'zh_CN'
+});
+$(".msgbox.default").msgbox({type:'alert'})
+</pre>
+		<div class="trigger">
+			<a href="sub.html" class="msgbox default">Open msgbox</a>
+		</div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Multiple instances</h3>
+		<div class="comment">
+			Multiple instances could be generated by $.msgbox;
+			they could be minimized to the top or bottom of the window (emulating the task bar).
+			The msgbox generated by $(...).msgbox will be arraged to the task bar.
+		</div>
+		
+		<pre class="code">
+$(".msgbox.multi").click(function(){
+	var id = parseInt(5*Math.random());
+	$.msgbox({
+		type: 'alert',
+		title: 'msgbox: ' + id,
+		content: 'hello' + id,
+		overlay: false,
+		icons: ['min', 'max', 'close'],
+		id: id 
+	});
+});
+$(".msgbox.close0").click(function(){
+	var msgbox = $.msgbox(0)
+	if (msgbox) msgbox.close();
+});
+$(".msgbox.restore0").click(function(){
+	var msgbox = $.msgbox(0)
+	if (msgbox) msgbox.restore();	
+});
+$(".msgbox.min0").click(function(){
+	var msgbox = $.msgbox(0)
+	if (msgbox) msgbox.min();
+});
+$(".msgbox.closeall").click(function(){
+	$.msgbox.closeAll();
+});
+$(".msgbox.restoreall").click(function(){
+	$.msgbox.restoreAll();	
+});
+$(".msgbox.minall").click(function(){
+	$.msgbox.minAll();	
+});
+$(".msgbox.fn").msgbox({
+	type: 'alert',
+	overlay: false,
+	icons: ['min', 'max', 'close'],
+	content: 'This will not be minimized to the task bar.'
+});</pre>
+		<div class="trigger"><a href="javascript:;" class="msgbox multi">Open msgbox</a>
+			<a href="javascript:;" class="msgbox close0">Close msgbox: 0</a>
+			<a href="javascript:;" class="msgbox restore0">Restore msgbox: 0</a>
+			<a href="javascript:;" class="msgbox min0">Minimize msgbox: 0</a>
+			<a href="javascript:;" class="msgbox closeall">Close all msgboxes</a>
+			<a href="javascript:;" class="msgbox restoreall">Restore all msgboxes</a>
+			<a href="javascript:;" class="msgbox minall">Minimize all msgboxes</a>
+			<a href="javascript:;" class="msgbox fn">Msgbox by $.fn.msgbox</a>
+		</div>
+	</div>
+	
+	<div class="wrap">
+		<h3 class="title">Custom buttons</h3>
+		<div class="comment">The custom buttons will have class name 'jMsgbox-button-N', where N is the index of the custom button, starting from 1</div>
+		<pre class="code">
+$(".msgbox.cbuttons").msgbox({
+	buttons: ['Custom Button 1', 'Custom Button 2'],
+	buttonEvents: {
+		'Custom Button 1': function() {
+			this.content('Custom Button 1');
+		},
+		'Custom Button 2': function() {
+			this.animate({width: 350, height: 160});
+		}
+	}
+});</pre>
+		<div class="trigger"><a href="sub.html" class="msgbox cbuttons">Open msgbox</a></div>
+	</div>
+	
+	<h2>Callbacks</h2>
+	
+	<div class="wrap">
+		<h3 class="title">Callbacks</h3>
+		<pre class="code">
+$(".msgbox.transitions").msgbox({
+	onOpen : function () { this.content('Opened');},
+	onLoad : function () { alert('Loaded'); },
+	onBeforeClose: function () { return confirm('Are you sure?'); },
+	onClose: function () {alert('closed');}
+});</pre>
+		<div class="trigger"><a href="sub.html" class="msgbox transitions">Open msgbox</a></div>
+	</div>
+	
+	
+	<h2>APIs</h2>
+	
+	<div class="wrap">
+		<h3 class="title">APIs</h3>
+		<pre class="code">
+$(".msgbox.api").msgbox({
+	type: 'text',
+	content: 'hello',
+	overlay: false,
+	resize: true
+});
+$(".msgbox.api-animate").click(function(){
+	$(".msgbox.api").msgbox().animate({
+		width: 400,
+		height: 200
+	});
+});
+$(".msgbox.api-close").click(function(){
+	$(".msgbox.api").msgbox().close();
+});
+$(".msgbox.api-open").click(function(){
+	$(".msgbox.api").msgbox().open();
+});
+$(".msgbox.api-title").click(function(){
+	$(".msgbox.api").msgbox().title('A new title');
+});
+$(".msgbox.api-content").click(function(){
+	$(".msgbox.api").msgbox().content('whatever');
+});
+$(".msgbox.api-focus").click(function(){
+	$(".msgbox.api").msgbox().focus();
+});
+$(".msgbox.api-min").click(function(){
+	$(".msgbox.api").msgbox().min();
+});
+$(".msgbox.api-max").click(function(){
+	$(".msgbox.api").msgbox().max();
+});
+$(".msgbox.api-restore").click(function(){
+	$(".msgbox.api").msgbox().restore();
+});
+$(".msgbox.api-remove").click(function(){
+	$(".msgbox.api").msgbox().remove();
+});
+
+</pre>
+		<div class="trigger">
+			<a href="javascript:;" class="msgbox api">Open msgbox</a>
+			<a href="javascript:;" class="msgbox api-animate">Msgbox animation</a>
+			<a href="javascript:;" class="msgbox api-close">Close msgbox</a>
+			<a href="javascript:;" class="msgbox api-open">Open msgbox (API)</a>
+			<a href="javascript:;" class="msgbox api-title">Change msgbox title</a>
+			<a href="javascript:;" class="msgbox api-content">Change msgbox content</a>
+			<a href="javascript:;" class="msgbox api-focus">Get focus</a>
+			<a href="javascript:;" class="msgbox api-min">Minimize msgbox</a>
+			<a href="javascript:;" class="msgbox api-restore">Restore msgbox</a>
+			<a href="javascript:;" class="msgbox api-max">Maximize msgbox</a>
+			<a href="javascript:;" class="msgbox api-remove">Remove msgbox</a>
+		</div>
+	</div>
+</body>
+</html>

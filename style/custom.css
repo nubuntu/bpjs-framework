@@ -1,0 +1,106 @@
+/* CSS Document */
+label, input { display:block; }
+		input.text { margin-bottom:12px; width:95%; padding: .4em; }
+		fieldset { padding:0; border:0; margin-top:25px; }
+.jtable-toolbarsearch{
+	color:#000;
+}
+.jtable-toolbarsearch-reset-button{
+	color:#000;
+}
+td {
+   padding: 5px;
+}
+.shadow-box {
+   padding: 5px;
+   display: none;
+   position: absolute;
+   background: rgba(0, 0, 0, 0.7); 
+   z-index: 10;
+}
+.jtable{
+	width:700px;
+	overflow:auto;
+}
+.jtable-view-command-button{
+  background: url('../images/view.png') no-repeat;
+  width: 16px;
+  height: 16px;
+}
+.navbar-static-top {
+z-index: 100;
+border-width: 0 0 1px;
+}
+.jarst {
+color:#000000;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.273em;
+	padding-left:2px;
+	padding-right:2px;	
+}
+.switch-wrapper {
+  display: inline-block;
+  position: relative;
+  top: 3px;
+}
+.pwk{
+	background-color:#F00;
+}
+.checked{
+	color:#0CF;
+}
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+  .jtable>thead>tr:last-child,.jtable-toolbar,.jtable-command-column-header,
+  .jtable-command-column,.divLink,.no-print{
+        display: none !important;
+  }
+  .pinkKTV .ktvLines .ktvLI{
+background: url(pink/v.gif) repeat scroll 0pt;  
+  }
+	.pinkKTV .ktvLI
+	{
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	line-height:16px;
+	font-size:11px;
+	} 
+	.screenonly{
+		 display: none !important;	
+	}
+	
+}
+@media screen {
+	.printonly{
+		 display: none !important;
+	}
+	.navbar-default,.panel-default>.panel-heading{
+		background-color:#46629E;
+	}
+	.navbar-default .navbar-brand{
+		color: #FFF;
+	}
+	
+ 	body{
+        font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+		color: #333333;
+    }
+	.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+		color:#FFF;
+		background-color:transparent;
+	}
+	button, input, optgroup, select, textarea{
+		color:#46629E;
+	}
+	.dropdown-toggle,.panel-default>.panel-heading{
+		color:#FFF;
+	}
+}

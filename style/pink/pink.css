@@ -1,0 +1,231 @@
+.pinkKTV
+{
+	white-space:nowrap;
+}
+.pinkKTV *
+{
+}
+/*ktvLI: TreeNode*/
+.pinkKTV .ktvLI
+{
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	line-height:16px;
+	font-size:11px;
+}
+/*ktvImage: Image in the node content*/
+.pinkKTV .ktvImage
+{
+	vertical-align:text-bottom;
+}
+
+/*ktvText: Text in the node content*/
+.pinkKTV .ktvText
+{
+	/*border:1px solid transparent;*/
+	color:#000000;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.273em;
+	padding-left:2px;
+	padding-right:2px;		
+}
+
+/*ktvOver: Apply to treenode content when mouse is over*/
+.pinkKTV .ktvOver .ktvText
+{
+	cursor:default;
+	text-decoration:underline;
+	color:#FF6699;
+}
+/*ktvOver: Apply to treenode content when mouse is selected*/
+.pinkKTV .ktvSelected .ktvText
+{
+	border:1px solid #FF6699;
+	background:#FF6699;
+	color:#FFFFFF;
+}
+
+/*ktvPM: PlusMinus button in general*/
+.pinkKTV .ktvPM
+{
+	height:11px;
+	width:11px;
+	margin:3px 8px 0pt -16px;
+	cursor:pointer;
+	display:inline-block;
+	font-size:0pt;
+	padding:0pt;
+	vertical-align:top;
+}
+html>body .pinkKTV .ktvPM
+{
+	display:-moz-inline-box;
+}
+
+/*ktvMinus: Minus button in detail*/
+.pinkKTV .ktvMinus
+{
+	background:url(pm.gif) no-repeat scroll 0pt -8pt;
+}
+
+/*ktvPlus: Plus button in detail*/
+.pinkKTV .ktvPlus
+{
+	background:url(pm.gif) no-repeat scroll 0pt 0pt;
+}
+
+/*ktvLoading: Ajax loading image*/
+.pinkKTV .ktvLoading
+{
+	width:16px;
+	height:16px;
+	background:url(loading.gif);
+	display:inline-block;
+	vertical-align:top;
+}
+html>body .pinkKTV .ktvLoading
+{
+	display:-moz-inline-box;
+}
+
+/*ktvEdit: Edit input when node is edited*/
+.pinkKTV .ktvEdit
+{
+	border:1px solid #6699cc;
+	background-color:#ccddee;
+	color:#000000;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+}
+
+/*ktvEdit: Dump treenode when drag*/
+.pinkKTV .ktvDrag
+{
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	opacity:0.5;
+}
+
+/*ktvDrop: Apply to treenode content when a node is selected to drop*/
+.pinkKTV .ktvDrop .ktvText
+{
+	border:1px solid #6699cc;
+	background-color:#ccddee;
+	cursor:pink;
+}
+
+
+/*ktvTop: Node on top*/
+/*ktvMid: Node in middle*/
+/*ktvBot: Node on bottom*/
+
+.pinkKTV .ktvMid, 
+.pinkKTV .ktvTop, 
+.pinkKTV .ktvBot
+{
+	padding-left:20px;
+}
+
+/*ktvUL: Node container*/
+.pinkKTV .ktvUL
+{
+	margin:0px;
+	padding-left:0px;
+}
+
+
+.pinkKTV .ktvUL .ktvUL,
+.pinkKTV .ktvUL .ktvUL .ktvUL
+{
+	margin:0px;
+	padding-left:20px;
+}
+
+
+/*ktvNoPadding: When showplusminus=false or rootnode visible = false*/
+.pinkKTV .ktvNoPadding .ktvUL
+{
+	margin:0px;
+	padding-left:0px;
+}
+
+.pinkKTV .ktvNoPadding .ktvUL .ktvUL
+{
+	margin:0px;
+	padding-left:20px;
+}
+
+/*ktvInv: Make root node invisible*/
+.pinkKTV .ktvInv
+{
+	display:none;
+}
+
+/*ktvNoPM: Make root node does not show PlusMinus button*/
+.pinkKTV .ktvNoPM
+{
+	padding-left:0px;
+	background:none;
+}
+.pinkKTV .ktvNoPM .ktvPM
+{
+	display:none;
+}
+
+
+
+/*ktvLines: Render tree with lines---------------------*/
+
+.pinkKTV .ktvLines .ktvLI
+{
+	background:url(v.gif) no-repeat scroll 0pt;	
+}
+
+.pinkKTV .ktvLines .ktvUL
+{
+	background:url(v.psb) no-repeat scroll 0pt;
+}
+
+.pinkKTV .ktvLines .ktvLast .ktvBot
+{
+	background:url(L.gif) no-repeat scroll 0pt;
+}
+
+
+.pinkKTV .ktvLines .ktvLast,
+.pinkKTV .ktvLines .ktvLast .ktvUL
+{
+	background:none;
+}
+
+.pinkKTV .ktvLines .ktvTop,
+.pinkKTV .ktvLines .ktvMid,
+.pinkKTV .ktvLines .ktvBot
+{
+	background:url(mid.gif) no-repeat scroll 0pt;
+}
+
+.pinkKTV .ktvLines .ktvLast .ktvTop
+{
+	background:url(horizon.gif) no-repeat scroll 0pt;
+}
+
+.pinkKTV .ktvLines .ktvLast .ktvNoPM
+{
+	background:none;
+}
+/*-------------------------*/
+
+
+
+

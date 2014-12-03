@@ -1,0 +1,92 @@
+
+.jMsgbox-overlay { background-color: #eee; }
+.jMsgbox-wrap { box-shadow: 0 3px 7px #222;
+				border-radius: 1px;
+				-webkit-border-radius: 1px;
+				-moz-border-radius: 1px;
+				border: 1px solid #999; }
+	.jMsgbox-title { 	background: #d1d1d1; /* Old browsers */
+						background: -moz-linear-gradient(top,  #d1d1d1 0%, #d3d3d3 6%, #989898 100%); /* FF3.6+ */
+						background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d1d1d1), color-stop(6%,#d3d3d3), color-stop(100%,#989898)); /* Chrome,Safari4+ */
+						background: -webkit-linear-gradient(top,  #d1d1d1 0%,#d3d3d3 6%,#989898 100%); /* Chrome10+,Safari5.1+ */
+						background: -o-linear-gradient(top,  #d1d1d1 0%,#d3d3d3 6%,#989898 100%); /* Opera 11.10+ */
+						background: -ms-linear-gradient(top,  #d1d1d1 0%,#d3d3d3 6%,#989898 100%); /* IE10+ */
+						background: linear-gradient(to bottom,  #d1d1d1 0%,#d3d3d3 6%,#989898 100%); /* W3C */
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1d1d1', endColorstr='#989898',GradientType=0 ); /* IE6-9 */
+						border-bottom: 1px solid #333;
+						text-align: center;
+						color:#000;
+						font-weight: bold;
+						text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+						height: 25px !important;
+					}
+		.jMsgbox-controls {left: 6px; direction: rtl; }
+			.jMsgbox-controls a { width: 14px;
+								  height: 14px;
+								  margin: 5px 2px;
+								  background-image:url(../img/controls.png);
+								  background-repeat: no-repeat; }
+			.jMsgbox-close {background-position: -47px -17px}
+			.jMsgbox-close:hover {background-position: -47px -1px}
+			.jMsgbox-max {background-position: -32px -17px}
+			.jMsgbox-max:hover {background-position: -32px -1px}
+			.jMsgbox-min {background-position: -17px -17px}
+			.jMsgbox-min:hover {background-position: -17px -1px}
+			.jMsgbox-restore {background-position: -2px -17px}
+			.jMsgbox-restore:hover {background-position: -2px -1px}
+			.jMsgbox-next {background-position: -76px -17px}
+			.jMsgbox-next:hover {background-position: -76px -1px}
+			.jMsgbox-prev {background-position: -108px -17px}
+			.jMsgbox-prev:hover {background-position: -108px -1px}
+			.jMsgbox-play {background-position: -92px -17px}
+			.jMsgbox-play:hover {background-position: -92px -1px}
+			.jMsgbox-pause {background-position: -124px -17px}
+			.jMsgbox-pause:hover {background-position: -124px -1px}
+	.jMsgbox-content { background-color: #e9e9e9; }
+	.jMsgbox-content .jMsgbox-shortcut {  background-position: 10px 10px; background-repeat: no-repeat; background-color: transparent; padding: 24px 0px 12px 70px !important; }
+	.jMsgbox-content .jMsgbox-alert {   background-image:url(../img/warning.png); color: #ac5b02; }
+	.jMsgbox-content .jMsgbox-info {    background-image:url(../img/info.png);    color: #004e9b;}
+	.jMsgbox-content .jMsgbox-warning { background-image:url(../img/warning.png); color: #a89806; }
+	.jMsgbox-content .jMsgbox-error {   background-image:url(../img/error.png);   color: #e30000;}
+	.jMsgbox-content .jMsgbox-success { background-image:url(../img/success.png); color: #006400;}
+	.jMsgbox-content .jMsgbox-confirm { background-image:url(../img/confirm.png); color: #000000;}
+	.jMsgbox-content .jMsgbox-prompt {  background-image:url(../img/prompt.png);  color: #000000;}
+		.jMsgbox-loading { background:url(../img/loading.gif) center center no-repeat transparent; }
+		.jMsgbox-loaded { padding: 15px; }
+	.jMsgbox-foot { padding: 10px 14px;
+                    height: 30px !important;
+					text-align: right;
+					background-color: #e9e9e9;}
+		.jMsgbox-foot input {   cursor: pointer;
+						        background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, #EBEBEB), color-stop(0.5, #ECECEC), color-stop(0.5, #F3F3F3), color-stop(1, #FFFFFF) );
+						        background-image: -moz-linear-gradient( center bottom, #EBEBEB 0%, #ECECEC 50%, #F3F3F3 50%, #FFFFFF 100% );
+						        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 1px 0 rgba(0,0,0,0.09);
+						        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 1px 0 rgba(0,0,0,0.09);
+						        box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 1px 0 rgba(0,0,0,0.09);
+						        display: inline-block;
+						        padding: 2px 33px;
+						        border-radius: 12px;
+						        -webkit-border-radius: 12px;
+						        -o-border-radius: 12px;
+						        -moz-border-radius: 12px;
+						        border: 1px solid #9a9a9a;
+						        color: #000;
+						        text-shadow: 0 1px 0 rgba(33,33,33,0.19);
+						     }
+		.jMsgbox-foot input:hover {
+								color: #333;
+								text-decoration: none;
+								background-position: 0 -15px;
+								-webkit-transition: background-position 0.1s linear;
+								-moz-transition: background-position 0.1s linear;
+								-o-transition: background-position 0.1s linear;
+								transition: background-position 0.1s linear;
+								background-color: #e6e6e6;
+							}
+	.jMsgbox-resize { background-position: -62px -18px;
+					  background-repeat: no-repeat;
+					  background-color: transparent;
+					  background-image:url(../img/controls.png);
+					  width: 10px;
+					  height: 10px; }
+	.jMsgbox-resize:hover {background-position: -62px -2px;}

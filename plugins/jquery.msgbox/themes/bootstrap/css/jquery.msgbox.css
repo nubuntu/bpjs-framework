@@ -1,0 +1,125 @@
+
+.jMsgbox-overlay { background-color: #fff; }
+.jMsgbox-wrap { box-shadow: 0 3px 7px #333;
+				border-radius: 6px;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+				border: 1px solid #999; }
+	.jMsgbox-title { color:#333;
+					 height: 50px !important;
+					 padding-left: 15px;
+					 font-size: 24px;
+					 border-bottom: 1px solid #eee;
+					 font-weight: bold;
+					 background-color: #fff;}
+		.jMsgbox-controls {right: 6px; top: 3px;}
+			.jMsgbox-controls a { width: 20px;
+								  height: 20px;
+								  margin: 10px 2px;
+								  background-image:url(../img/controls.png);
+								  background-repeat: no-repeat; }
+			.jMsgbox-close {background-position: -63px -25px}
+			.jMsgbox-close:hover {background-position: -63px -1px}
+			.jMsgbox-max {background-position: -42px -25px}
+			.jMsgbox-max:hover {background-position: -42px -1px}
+			.jMsgbox-min {background-position: -21px -25px}
+			.jMsgbox-min:hover {background-position: -21px -1px}
+			.jMsgbox-restore {background-position: 0px -25px}
+			.jMsgbox-restore:hover {background-position: 0px -1px}
+			.jMsgbox-next {background-position: -104px -25px}
+			.jMsgbox-next:hover {background-position: -104px -1px}
+			.jMsgbox-prev {background-position: -139px -25px}
+			.jMsgbox-prev:hover {background-position: -139px -1px}
+			.jMsgbox-play {background-position: -122px -25px}
+			.jMsgbox-play:hover {background-position: -122px -1px}
+			.jMsgbox-pause {background-position: -157px -25px}
+			.jMsgbox-pause:hover {background-position: -157px -1px}
+	.jMsgbox-content { background-color: #fff; }
+	.jMsgbox-content .jMsgbox-shortcut {  background-position: 20px 20px; background-repeat: no-repeat; background-color: transparent; padding: 36px 0px 0px 78px !important; }
+	.jMsgbox-content .jMsgbox-alert {   background-image:url(../img/warning.png); color: #ac5b02; }
+	.jMsgbox-content .jMsgbox-info {    background-image:url(../img/info.png);    color: #004e9b;}
+	.jMsgbox-content .jMsgbox-warning { background-image:url(../img/warning.png); color: #a89806; }
+	.jMsgbox-content .jMsgbox-error {   background-image:url(../img/error.png);   color: #e30000;}
+	.jMsgbox-content .jMsgbox-success { background-image:url(../img/success.png); color: #006400;}
+	.jMsgbox-content .jMsgbox-confirm { background-image:url(../img/confirm.png); color: #000000;}
+	.jMsgbox-content .jMsgbox-prompt {  background-image:url(../img/prompt.png);  color: #000000; padding-top: 20px !important;}
+          .jMsgbox-prompt-input {   display: block;
+								padding: 6px 6px;
+								margin-bottom: 10px;
+								color: #555;
+								vertical-align: middle;
+								-webkit-border-radius: 4px;
+								-moz-border-radius: 4px;
+								border-radius: 4px;
+								background-color: #FFF;
+								border: 1px solid #CCC;
+								-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+								-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+								box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+								-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+								-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+								-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+								transition: border linear 0.2s, box-shadow linear 0.2s;
+								width: 206px;}
+		.jMsgbox-loading { background:url(../img/loading.gif) center center no-repeat transparent; }
+		.jMsgbox-loaded { padding: 15px; }
+	.jMsgbox-foot { 
+                    height: 60px !important;
+					padding-right: 12px;
+					margin-bottom: 0;
+					text-align: right;
+					background-color: #F5F5F5;
+					border-top: 1px solid #DDD;
+					-webkit-border-radius: 0 0 6px 6px;
+					-moz-border-radius: 0 0 6px 6px;
+					border-radius: 0 0 6px 6px;
+					-webkit-box-shadow: inset 0 1px 0 #FFF;
+					-moz-box-shadow: inset 0 1px 0 #ffffff;
+					box-shadow: inset 0 1px 0 #FFF;}
+		.jMsgbox-foot input {   display: inline-block;
+								padding: 4px 12px;
+								margin-bottom: 0;
+								margin-top: 12px;
+								font-size: 14px;
+								line-height: 20px;
+								color: #333333;
+								text-align: center;
+								text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+								vertical-align: middle;
+								cursor: pointer;
+								background-color: #f5f5f5;
+								background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+								background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+								background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+								background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+								background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+								background-repeat: repeat-x;
+								border: 1px solid #cccccc;
+								border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+								border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+								border-bottom-color: #b3b3b3;
+								-webkit-border-radius: 4px;
+								   -moz-border-radius: 4px;
+										border-radius: 4px;
+								filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+								filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+								-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+								   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+										box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); }
+		.jMsgbox-foot input:hover {
+								color: #333;
+								text-decoration: none;
+								background-position: 0 -15px;
+								-webkit-transition: background-position 0.1s linear;
+								-moz-transition: background-position 0.1s linear;
+								-o-transition: background-position 0.1s linear;
+								transition: background-position 0.1s linear;
+								background-color: #e6e6e6;
+							}
+	.jMsgbox-resize { background-position: -85px -30px;
+					  background-repeat: no-repeat;
+					  background-color: transparent;
+					  background-image:url(../img/controls.png);
+					  width: 10px;
+					  height: 10px; }
+	.jMsgbox-resize:hover {background-position: -85px -6px;}

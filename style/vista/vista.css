@@ -1,0 +1,229 @@
+.vistaKTV
+{
+	white-space:nowrap;
+}
+.vistaKTV *
+{
+}
+/*ktvLI: TreeNode*/
+.vistaKTV .ktvLI
+{
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	line-height:16px;
+	font-size:11px;
+}
+/*ktvImage: Image in the node content*/
+.vistaKTV .ktvImage
+{
+	vertical-align:text-bottom;
+}
+
+/*ktvText: Text in the node content*/
+.vistaKTV .ktvText
+{
+	/*border:1px solid transparent;*/
+	color:#000000;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.273em;
+	padding-left:2px;
+	padding-right:2px;		
+}
+
+/*ktvOver: Apply to treenode content when mouse is over*/
+.vistaKTV .ktvOver .ktvText
+{
+	cursor:default;
+	border:1px solid #d8f0fa;
+	background-image:url('bg_over.gif')
+}
+/*ktvOver: Apply to treenode content when mouse is selected*/
+.vistaKTV .ktvSelected .ktvText
+{
+	border:1px solid #99defd;
+	background-image:url('bg_selected.gif')
+}
+
+/*ktvPM: PlusMinus button in general*/
+.vistaKTV .ktvPM
+{
+	height:11px;
+	width:11px;
+	margin:3px 8px 0pt -16px;
+	cursor:pointer;
+	display:inline-block;
+	font-size:0pt;
+	padding:0pt;
+	vertical-align:top;
+}
+html>body .vistaKTV .ktvPM
+{
+	display:-moz-inline-box;
+}
+/*ktvMinus: Minus button in detail*/
+.vistaKTV .ktvMinus
+{
+	background:url(pm.gif) no-repeat scroll 0pt -8pt;
+}
+
+/*ktvPlus: Plus button in detail*/
+.vistaKTV .ktvPlus
+{
+	background:url(pm.gif) no-repeat scroll 0pt 0pt;
+}
+
+/*ktvLoading: Ajax loading image*/
+.vistaKTV .ktvLoading
+{
+	width:16px;
+	height:16px;
+	background:url(loading.gif);
+	display:inline-block;
+	vertical-align:top;
+}
+html>body .vistaKTV .ktvLoading
+{
+	display:-moz-inline-box;
+}
+
+/*ktvEdit: Edit input when node is edited*/
+.vistaKTV .ktvEdit
+{
+	border:1px solid #6699cc;
+	background-color:#ccddee;
+	color:#000000;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+}
+
+/*ktvEdit: Dump treenode when drag*/
+.vistaKTV .ktvDrag
+{
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	opacity:0.5;
+}
+
+/*ktvDrop: Apply to treenode content when a node is selected to drop*/
+.vistaKTV .ktvDrop .ktvText
+{
+	border:1px solid #6699cc;
+	background-color:#ccddee;
+	cursor:default;
+}
+
+
+/*ktvTop: Node on top*/
+/*ktvMid: Node in middle*/
+/*ktvBot: Node on bottom*/
+
+.vistaKTV .ktvMid, 
+.vistaKTV .ktvTop, 
+.vistaKTV .ktvBot
+{
+	padding-left:20px;
+}
+
+/*ktvUL: Node container*/
+.vistaKTV .ktvUL
+{
+	margin:0px;
+	padding-left:0px;
+}
+
+
+.vistaKTV .ktvUL .ktvUL,
+.vistaKTV .ktvUL .ktvUL .ktvUL
+{
+	margin:0px;
+	padding-left:20px;
+}
+
+
+/*ktvNoPadding: When showplusminus=false or rootnode visible = false*/
+.vistaKTV .ktvNoPadding .ktvUL
+{
+	margin:0px;
+	padding-left:0px;
+}
+
+.vistaKTV .ktvNoPadding .ktvUL .ktvUL
+{
+	margin:0px;
+	padding-left:20px;
+}
+
+/*ktvInv: Make root node invisible*/
+.vistaKTV .ktvInv
+{
+	display:none;
+}
+
+/*ktvNoPM: Make root node does not show PlusMinus button*/
+.vistaKTV .ktvNoPM
+{
+	padding-left:0px;
+	background:none;
+}
+.vistaKTV .ktvNoPM .ktvPM
+{
+	display:none;
+}
+
+
+
+/*ktvLines: Render tree with lines---------------------*/
+
+.vistaKTV .ktvLines .ktvLI
+{
+	background:url(v.gif) no-repeat scroll 0pt;	
+}
+
+.vistaKTV .ktvLines .ktvUL
+{
+	background:url(v.gif) no-repeat scroll 0pt;
+}
+
+.vistaKTV .ktvLines .ktvLast .ktvBot
+{
+	background:url(L.gif) no-repeat scroll 0pt;
+}
+
+
+.vistaKTV .ktvLines .ktvLast,
+.vistaKTV .ktvLines .ktvLast .ktvUL
+{
+	background:none;
+}
+
+.vistaKTV .ktvLines .ktvTop,
+.vistaKTV .ktvLines .ktvMid,
+.vistaKTV .ktvLines .ktvBot
+{
+	background:url(mid.gif) no-repeat scroll 0pt;
+}
+
+.vistaKTV .ktvLines .ktvLast .ktvTop
+{
+	background:url(horizon.gif) no-repeat scroll 0pt;
+}
+
+.vistaKTV .ktvLines .ktvLast .ktvNoPM
+{
+	background:none;
+}
+/*-------------------------*/
+
+
+
+

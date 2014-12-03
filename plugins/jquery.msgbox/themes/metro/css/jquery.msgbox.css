@@ -1,0 +1,71 @@
+
+.jMsgbox-overlay { background-color: #fff; }
+.jMsgbox-wrap { box-shadow: 0 3px 7px #333;
+				background-color: #fff;
+				 }
+	.jMsgbox-title {	
+				        background-color:#333;
+						color:#fff;
+						font-weight: bold;
+						padding-left: 12px;
+					}
+		.jMsgbox-controls { right: 6px; }
+			.jMsgbox-controls a { width: 14px;
+								  height: 14px;
+								  margin: 8px 2px;
+								  background-image:url(../img/controls.png);
+								  background-repeat: no-repeat; }
+			.jMsgbox-close {background-position: -47px -17px}
+			.jMsgbox-close:hover {background-position: -47px 0px}
+			.jMsgbox-max {background-position: -15px -17px}
+			.jMsgbox-max:hover {background-position: -15px 0px}
+			.jMsgbox-min {background-position: -32px -17px}
+			.jMsgbox-min:hover {background-position: -32px 0px}
+			.jMsgbox-restore {background-position: 0px -17px}
+			.jMsgbox-restore:hover {background-position: 0px 0px}
+			.jMsgbox-next {background-position: -77px -17px}
+			.jMsgbox-next:hover {background-position: -77px 0px}
+			.jMsgbox-prev {background-position: -108px -17px}
+			.jMsgbox-prev:hover {background-position: -108px 0px}
+			.jMsgbox-play {background-position: -92px -17px}
+			.jMsgbox-play:hover {background-position: -92px 0px}
+			.jMsgbox-pause {background-position: -125px -17px}
+			.jMsgbox-pause:hover {background-position: -125px 0px}
+	.jMsgbox-content { background-color: #fff; }
+	.jMsgbox-content .jMsgbox-shortcut {  background-position: 10px 10px; background-repeat: no-repeat; background-color: transparent; padding: 24px 0px 12px 70px !important; }
+	.jMsgbox-content .jMsgbox-alert {   background-image:url(../img/warning.png); color: #ac5b02; }
+	.jMsgbox-content .jMsgbox-info {    background-image:url(../img/info.png);    color: #004e9b;}
+	.jMsgbox-content .jMsgbox-warning { background-image:url(../img/warning.png); color: #a89806; }
+	.jMsgbox-content .jMsgbox-error {   background-image:url(../img/error.png);   color: #e30000;}
+	.jMsgbox-content .jMsgbox-success { background-image:url(../img/success.png); color: #006400;}
+	.jMsgbox-content .jMsgbox-confirm { background-image:url(../img/confirm.png); color: #000000;}
+	.jMsgbox-content .jMsgbox-prompt {  background-image:url(../img/prompt.png);  color: #000000;}
+		.jMsgbox-content .jMsgbox-prompt-input {
+										border: none;
+										background-color: #b1d0f1;
+										padding: 6px;
+									}
+		.jMsgbox-loading { background:url(../img/loading.gif) center center no-repeat transparent; }
+		.jMsgbox-loaded {  }
+	.jMsgbox-foot { 
+					text-align: right;
+					border-top: 1px solid #aaa;}
+		.jMsgbox-foot input {   cursor: pointer;
+						        display: inline-block;
+						        padding: 4px 11px;
+								border:none;
+						        color: #fff;
+								background-color: #2D7EDB;
+								margin:6px 8px 0px 0px;
+						     }
+		.jMsgbox-foot input:hover {
+								border-color:#fff;
+								background-color:#1a5495;
+							}
+	.jMsgbox-resize { background-position: -62px -18px;
+					  background-repeat: no-repeat;
+					  background-color: transparent;
+					  background-image:url(../img/controls.png);
+					  width: 10px;
+					  height: 10px; }
+	.jMsgbox-resize:hover {background-position: -62px -2px;}

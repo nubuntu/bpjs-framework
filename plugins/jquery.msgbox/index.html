@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>jquery.msgbox - Another jquery popup plugin - pwwang</title>
+	<meta name="description" content="Popup a box in a website" />
+	<meta name="keywords" content="jquery plugin, popup, modal, colorbox, thickbox" />
+	<meta name="robots" content="index, follow" />
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	
+</head>
+<body>
+	<div id="header">
+		<div id="logo">
+			<a href="index.html">
+				<img src="logo.png" />
+			</a>
+		</div>
+		<div class="menu">
+			<a href="index.html" class="active">Home</a>
+		</div>
+		<div class="menu">
+			<a href="doc.html">Documentation</a>
+		</div>
+		<div class="menu">
+			<a href="examples/index.html" target="_blank">Examples</a>
+		</div>
+		<div class="menu">
+			<a href="https://github.com/pwwang/jmsgbox" target="_blank">Download</a>
+		</div>
+	</div>
+	<div class="sep"></div>
+	<div id="main">
+		<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+		
+		<p>A jquery popup plugin, version 8.0</p>
+		
+		<p><em>Previous versions could be found at <a href="https://code.google.com/p/jquery-msgbox/">https://code.google.com/p/jquery-msgbox/</a></em></p>
+		
+		<p>Browser support: morden browsers, IE7+</p>
+		<p>Required: jquery 1.7+</p>
+		
+		<h2>
+		<a name="why-another-jquery-popup-plugin-" class="anchor" href="#why-another-jquery-popup-plugin-"><span class="octicon octicon-link"></span></a>Why another jquery popup plugin ?</h2>
+		
+		<p>Most of the exising jquery popup plugins are lacking some of the features:</p>
+		
+		<ul>
+		<li>Multiple instances support</li>
+		<li>Resize handler to resize the popup box</li>
+		<li>Maximization/Minimization of the popup box</li>
+		<li>Dragging support</li>
+		<li>Theme customization</li>
+		<li>Key bindings support</li>
+		<li>Working as a photo slideshow</li>
+		<li>Fourth party library indenpendent (some may dependent on jQuery UI, etc)</li>
+		</ul>
+		<p>If you are looking for a plugin with most of the above features, here it is</p>
+		<h2>
+		<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+		
+		<p><em>(c) could be customized</em></p>
+		
+		<ul>
+		<li>Key bindings (c)</li>
+		<li>Overlay events (c)</li>
+		<li>Draggable</li>
+		<li>Resizable</li>
+		<li>Icons, (prev,play,next,min,max,close) (c)</li>
+		<li>Buttons in footer, and their events could be fully customized (c)</li>
+		<li>Working as a photo viewer</li>
+		<li>Themes (c)</li>
+		<li>Multiple instances (task tar simulation)</li>
+		<li>Internationalization (c)</li>
+		<li>API</li>
+		</ul><h2>
+		<a name="basic-usage" class="anchor" href="#basic-usage"><span class="octicon octicon-link"></span></a>Basic usage</h2>
+		
+		<pre>$(".trigger").msgbox({
+	type: 'html',
+	content: '&lt;p&gt;Hello&lt;/p&gt;'
+});
+
+// calling API
+$(".trigger").msgbox().close();
+
+// multiple instances
+$.msgbox({
+	type: 'text',
+	content: 'instance1',
+	id: 0
+});
+$.msgbox({
+	type: 'html',
+	content: 'instance2',
+	id: 'msgbox1'
+});
+
+// calling API
+$.msgbox(0).close();
+$.msgbox('msgbox1').min();
+		</pre></article>
+	</div>
+	<div id="footer">
+		<a href="https://github.com/pwwang" target="_blank">Fork me on github</a> &nbsp; | &nbsp;
+		<a href="http://pwwang.com" target="_blank">My blog</a>
+	</div>
+</body>
+</html>

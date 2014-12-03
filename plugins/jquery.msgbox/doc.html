@@ -1,0 +1,749 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Documentation - jquery.msgbox</title>
+	<meta name="description" content="Popup a box in a website" />
+	<meta name="keywords" content="jquery plugin, popup, modal, colorbox, thickbox" />
+	<meta name="robots" content="index, follow" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.msgbox.js"></script>
+	<link rel="stylesheet" href="themes/metro/css/jquery.msgbox.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".jmb-text").msgbox({
+			type: 'text',
+			content: 'Text content'
+		});
+		
+		$(".jmb-html").msgbox({
+			type: 'html',
+			content: '<p>HTML content</p><p style="color:#f33;">HTML content</p>'
+		});
+		
+		$(".jmb-ajax").msgbox({
+			type: 'ajax',
+			content: 'index.html'
+		});
+
+		$(".jmb-iframe").msgbox({
+			type: 'iframe',
+			content: 'index.html'
+		});
+		
+		$(".jmb-confirm").msgbox({
+			type: 'confirm',
+			content: 'Are you sure',
+			onClose: function(){
+				alert(!!this.val());
+			}
+		});
+		
+		$(".jmb-alert").msgbox({
+			type: 'alert',
+			content: 'Message'
+		});
+		
+		$(".jmb-prompt").msgbox({
+			type: 'prompt',
+			content: 'Please input: ',
+			onClose: function(){
+				alert(this.val());
+			}
+		});
+		
+		$(".jmb-photo").msgbox({
+			type: 'photo'
+		});
+		
+		$(".jmb-photo-opener").click(function(){
+			$.msgbox({
+				type: 'photo',
+				content: '.jmb-photo'
+			});
+		});
+		
+		$(".jmb-gallery").msgbox({
+			type: 'gallery'
+		});
+		
+		$(".jmb-gallery-opener").click(function(){
+			$.msgbox({
+				type: 'gallery',
+				content: '.jmb-gallery'
+			});
+		});
+	});
+	</script>
+</head>
+<body>
+	
+	<div id="header">
+		<div id="logo">
+			<a href="index.html">
+				<img src="logo.png" />
+			</a>
+		</div>
+		<div class="menu">
+			<a href="index.html">Home</a>
+		</div>
+		<div class="menu">
+			<a href="doc.html" class="active">Documentation</a>
+		</div>
+		<div class="menu">
+			<a href="examples/index.html" target="_blank">Examples</a>
+		</div>
+		<div class="menu">
+			<a href="https://github.com/pwwang/jmsgbox" target="_blank">Download</a>
+		</div>
+	</div>
+	<div class="sep"></div>
+	<div id="main">
+		<h2>Start to use</h2>
+		<p>Refer jquery.msgbox:</p>
+		<pre>
+&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="/path/to/jquery.msgbox.min.js"&gt;&lt;/script&gt;
+</pre>
+		<p>Different type of contents:</p>
+		<h3>text: <a href="javascript:;" class="jmb jmb-text">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-text").msgbox({
+	type: 'text',
+	content: 'Text content'
+});
+</pre>
+		<h3>html (default): <a href="javascript:;" class="jmb jmb-html">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-html").msgbox({
+	type: 'html',
+	content: '&lt;p&gt;HTML content&lt;/p&gt;&lt;p style="color:#f33;"&gt;HTML content&lt;/p&gt;'
+});
+</pre>
+		<h3>ajax: <a href="javascript:;" class="jmb jmb-ajax">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-ajax").msgbox({
+	type: 'ajax',
+	content: 'index.html'
+});
+</pre>
+		
+		<h3>iframe: <a href="javascript:;" class="jmb jmb-iframe">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-iframe").msgbox({
+	type: 'iframe',
+	content: 'index.html'
+});
+</pre>
+		
+		<h3>confirm: <a href="javascript:;" class="jmb jmb-confirm">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-confirm").msgbox({
+	type: 'confirm',
+	content: 'Are you sure',
+	onClose: function(){
+		alert(!!this.val());
+	}
+});
+</pre>
+		<h3>alert: <a href="javascript:;" class="jmb jmb-alert">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-alert").msgbox({
+	type: 'alert',
+	content: 'Message',
+	title: 'Alert'
+});
+</pre>
+		
+		<h3>prompt: <a href="javascript:;" class="jmb jmb-prompt">Open msgbox</a></h3>
+		
+		<pre>
+$(".jmb-prompt").msgbox({
+	type: 'prompt',
+	content: 'Please input: ',
+	onClose: function(){
+		alert(this.val());
+	}
+});
+</pre>
+		
+		<h3>photo: <a href="https://www.google.com.hk/images/srpr/logo11w.png" title="Google Logo" class="jmb jmb-photo">Open msgbox</a>
+		<a href="javascript:;" class="jmb jmb-photo-opener">Open msgbox by $.msgbox</a>
+		</h3>
+		
+		<pre>
+//&lt;a href="https://www.google.com.hk/images/srpr/logo11w.png" title="Google Logo" class="jmb-photo"&gt;Open msgbox&lt;/a&gt;
+$(".jmb-photo").msgbox({
+	type: 'photo'
+});
+$(".jmg-photo-opener").click(function(){
+	$.msgbox({
+		type: 'photo',
+		content: '.jmb-photo'
+	});
+});
+</pre>
+		
+		
+		<h3>gallery:
+		<a href="https://www.google.com.hk/images/srpr/logo11w.png" title="Google Logo" class="jmb jmb-gallery">Open msgbox (1st photo)</a>
+		<a href="http://www.kalambakal.com/wp-content/uploads/2013/09/Bing_Logo.jpg" title="Bing Logo" class="jmb jmb-gallery">Open msgbox (2nd photo)</a>
+		<a href="https://www.nsslabs.com/sites/default/files/import/assets/images/blog/yahoo-logo.jpg" title="Yahoo Logo" class="jmb jmb-gallery">Open msgbox (3rd photo)</a>
+		<a href="javascript:;" class="jmb jmb-gallery-opener">Open msgbox by $.msgbox</a>
+		</h3>
+		
+		<pre>
+$(".jmb-gallery").msgbox({
+	type: 'gallery'
+});
+$(".jmg-gallery-opener").click(function(){
+	$.msgbox({
+		type: 'gallery',
+		content: '.jmb-gallery'
+	});
+});
+</pre>
+		
+		
+		
+		
+		<h2>Full settings</h2>
+		<p>jquery.msgbox could be either initialized by <font>$.msgbox(arguments)</font> or <font>$(SELECTOR).msgbox(arguments)</font></p>
+		<p>The arguments is an javascript object with key-value pairs (e.g. <font>{title: 'Hello', content: 'Hello world!'}</font>):</p>
+		<p><b>NOTICE: </b>Although no arguments is required, to initialize a msgbox, an object, even an empty object (<font>{}</font>), is needed.</p>
+		<p>Because we use <font>$.msgbox()</font> and <font>$(SELECTOR).msgbox()</font> to retrieve the object. </p>
+		<table class="doctable" cellpadding="4" cellspacing="1" width="100%">
+			<tr>
+				<th>Key</th>
+				<th>Value type</th>
+				<th>Default value</th>
+				<th width="200px">Description</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td class="key">fixed</td>
+				<td class="type">boolean</td>
+				<td class="value">true</td>
+				<td>Whether the position of the box is fixed</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">overlay</td>
+				<td class="type">boolean</td>
+				<td class="value">true</td>
+				<td>Whether to show the overlay or not</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">overlayEvent</td>
+				<td class="type">string|function</td>
+				<td class="value">'flash'</td>
+				<td>The event when clicking the overlay</td>
+				<td>If a string is given, the API will be called; otherwise, the function will be fired.</td>
+			</tr>
+			<tr>
+				<td class="key">id</td>
+				<td class="type">string|number</td>
+				<td class="value">0</td>
+				<td>The identity of the instance, used for multiple instances</td>
+				<td>Multiple instances are only available by using <font>$.msgbox(...)</font> with a unique id</td>
+			</tr>
+			<tr>
+				<td class="key">open</td>
+				<td class="type">boolean</td>
+				<td class="value"><font>$(SELECTOR).msgbox</font>: false<br />
+								  <font>$.msgbox</font>: true</td>
+				<td>Whether to open the msgbox after initialized.</td>
+				<td>When using <font>$(SELECTOR).msgbox</font>, the msgbox will not be opened until the trigger is clicked or the <font>.open()</font> API is called.
+				When using <font>$.msgbox</font>, it will be opened by default.</td>
+			</tr>
+			<tr>
+				<td class="key">drag</td>
+				<td class="type">boolean|jquery selector</td>
+				<td class="value">window</td>
+				<td>Whether to enable the dragging of msgobx.</td>
+				<td>If a jquery selector is given, the msgbox will be allowed only dragged in the element.</td>
+			</tr>
+			<tr>
+				<td class="key">resize</td>
+				<td class="type">boolean|object</td>
+				<td class="value">true</td>
+				<td>Whether to enable the resizing of msgobx.</td>
+				<td>If true is given, it will use <font>{width: minWidth, height: titleHeight}</font> as default. It defines the minimal scale of msgbox can be resized.</td>
+			</tr>
+			<tr>
+				<td class="key">title</td>
+				<td class="type">boolean|string</td>
+				<td class="value">false</td>
+				<td>The title of msgbox</td>
+				<td>If false is given, it will be replace by the attribute "title" of the trigger when in <font>photo/image/gallery/album</font> mode.</td>
+			</tr>
+			<tr>
+				<td class="key">type</td>
+				<td class="type">string</td>
+				<td class="value">'html'</td>
+				<td>The type of msgbox</td>
+				<td>Supported types: <font>text, ajax, html, iframe, confirm, alert, prompt, warning, info, error, success, photo, image=photo, album, gallery=album</font></td>
+			</tr>
+			<tr>
+				<td class="key">content</td>
+				<td class="type">boolean|string</td>
+				<td class="value">false</td>
+				<td>The content of msgbox</td>
+				<td>If false is given, the content will be replaced by jquery.msgbox version information.
+				Different types have different contents. For <font>text, html, confirm, alert, prompt, warning, info, error, success</font>, the <font>content</font>
+				is the content which will be display in the box. For <font>ajax, iframe</font>, the <font>content</font> is the url to be loaded. For <font>photo, image, album, gallery</font>, the <font>content</font>
+				is the jquery selector of the triggers, which are usually links like <font>&lt;a href="photo.jpg" class="photo" title="A photo"&gt;click to show photo&lt;/a&gt;</font>.
+				</td>
+			</tr>
+			<tr>
+				<td class="key">icons</td>
+				<td class="type">array</td>
+				<td class="value">
+					<font>type=confirm, alert, prompt, warning, info, error, success, photo, image</font>: ['close'] <br />
+					<font>type=album, gallery</font>: ['prev', 'play', 'next', 'min', 'max', 'close'] <br />
+					<font>type=other</font>: ['max', 'close']
+				</td>
+				<td>The icons of msgbox</td>
+				<td>Supported icons: prev, play, next, min, max, close</td>
+			</tr>
+			<tr>
+				<td class="key">buttons</td>
+				<td class="type">array</td>
+				<td class="value">
+					<font>type=confirm, alert, prompt, warning, info, error, success, photo, image</font>: ['OK'] <br />
+					<font>type=confirm, prompt</font>: ['OK', 'Cancel'] <br />
+					<font>type=other</font>: []
+				</td>
+				<td>The buttons in the footer</td>
+				<td>This could be fully customized. The events could be specify by <font>buttonEvents</font></td>
+			</tr>
+			<tr>
+				<td class="key">buttonEvents</td>
+				<td class="type">object</td>
+				<td class="value">{}</td>
+				<td>The events bond to the buttons</td>
+				<td>The key should exist in <font>buttons</font>, <font>'OK'</font>, <font>'Cancel'</font> will override the default actions of the two buttons.
+				When specify a function, <font>this</font> will refer to the msgbox itself.
+				If a string specified to a key, the API will be called. E.g. <font>{'OK':'close'}</font> means when click OK button, it will call API <font>close()</font>
+				</td>
+			</tr>
+			<tr>
+				<td class="key">keyEvents</td>
+				<td class="type">object</td>
+				<td class="value">{		
+			Esc: 'close', <br />
+			Space: 'play',<br />
+			Left: 'prev',<br />
+			Right: 'next',<br />
+			Enter: 'play'}</td>
+				<td>The key events. </td>
+				<td>Only takes effects on the focusing msgbox. The meaning of the value is the same as <font>buttonEvents</font></td>
+			</tr>
+			<tr>
+				<td class="key">prefix</td>
+				<td class="type">string</td>
+				<td class="value">jMsgbox</td>
+				<td>The class prefix or the jquery events binding namespace.</td>
+				<td>E.g. the class of overlay: <font>jMsgbox-overlay</font> (see css file). The event bond to overlay: <font>'click.jMsgbox'</font></td>
+			</tr>
+			<tr>
+				<td class="key">width</td>
+				<td class="type">number</td>
+				<td class="value">600</td>
+				<td>The width of msgbox</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">height</td>
+				<td class="type">number</td>
+				<td class="value">450</td>
+				<td>The height of msgbox</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">initialWidth</td>
+				<td class="type">number</td>
+				<td class="value">350</td>
+				<td>The initial width of msgbox</td>
+				<td>See <font>initialHeight</font></td>
+			</tr>
+			<tr>
+				<td class="key">initialHeight</td>
+				<td class="type">number</td>
+				<td class="value">220</td>
+				<td>The initial height of msgbox</td>
+				<td>1. the initial dimension to be zoomed in/out to <font>{width, height}</font><br />
+				2.If <font>width</font> and <font>height</font> are not given, or exactly the same as the default <font>width</font> and <font>height</font>, they will be specified as <font>initialWidth</font> and <font>initialHeight</font>
+				, respectively, when the type is one of <font>alert, info, prompt, confirm, success, warning, error</font>. </td>
+			</tr>
+			<tr>
+				<td class="key">top</td>
+				<td class="type">boolean|number</td>
+				<td class="value">false</td>
+				<td>The initial top position of the msgbox</td>
+				<td>If false, it will be placed in the middle of the window</td>
+			</tr>
+			<tr>
+				<td class="key">left</td>
+				<td class="type">boolean|number</td>
+				<td class="value">false</td>
+				<td>The inital left position of the msgbox</td>
+				<td>If false, it will be placed in the center of the window</td>
+			</tr>
+			<tr>
+				<td class="key">titleHeight</td>
+				<td class="type">number</td>
+				<td class="value">40</td>
+				<td>The height of the title wrapper</td>
+				<td>If the height of <font>.jMsgbox-title</font> is not indicated in css, this value will be used. If you want to override it in css, please use <font>!important</font></td>
+			</tr>
+			<tr>
+				<td class="key">footHeight</td>
+				<td class="type">number</td>
+				<td class="value">30</td>
+				<td>The height of the footer</td>
+				<td>Similar as <font>titleHeight</font>, the class name is <font>.jMsgbox-foot</font></td>
+			</tr>
+			<tr>
+				<td class="key">transition</td>
+				<td class="type">string</td>
+				<td class="value">swing</td>
+				<td>The transition when opening or closing msgbox</td>
+				<td>Only jquery built-in transition supported: <font>swing, linear</font></td>
+			</tr>
+			<tr>
+				<td class="key">speed</td>
+				<td class="type">number</td>
+				<td class="value">300</td>
+				<td>The speed of the opening or closing animation</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">opacity</td>
+				<td class="type">number</td>
+				<td class="value">0.9</td>
+				<td>The opacity of the overlay</td>
+				<td>Of course you can use css, but this is an easy way to make it supported by cross-browsers</td>
+			</tr>
+			<tr>
+				<td class="key">zIndex</td>
+				<td class="type">number</td>
+				<td class="value">99</td>
+				<td>The z-index of overlay and the box wrapper</td>
+				<td>Use it just in case of some elements with greater z-index in the page (, if you want to cover them with msgbox).</td>
+			</tr>
+			<tr>
+				<td class="key">lang</td>
+				<td class="type">string</td>
+				<td class="value">en</td>
+				<td>The language of the msgbox</td>
+				<td>See <font>Internationalization</font></td>
+			</tr>
+			<tr>
+				<td class="key">minPos</td>
+				<td class="type">string</td>
+				<td class="value">top</td>
+				<td>The position of the "task bar"</td>
+				<td>When create multiple instances, you are able to minimize all of them to simulate a task bar.</td>
+			</tr>
+			<tr>
+				<td class="key">minWidth</td>
+				<td class="type">number</td>
+				<td class="value">200</td>
+				<td>The minimal width of msgbox</td>
+				<td>1. the width of msgbox when minimized
+				2. the minimal width when resize msgbox</td>
+			</tr>
+			<tr>
+				<td class="key">padding</td>
+				<td class="type">number</td>
+				<td class="value">0</td>
+				<td>The padding of the content</td>
+				<td>Sometimes you need a padding of the content, e.g.: for text type or html type. However, you don't need them for photos in most cases.
+				CSS cannot differentiate the types, so you can define them here. Remember to use !important to override if you'd like to define it in CSS.
+				</td>
+			</tr>
+			<tr>
+				<td class="key">photoAuto</td>
+				<td class="type">boolean</td>
+				<td class="value">true</td>
+				<td>Whether to start playing the gallery when open it</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">photoSpeed</td>
+				<td class="type">number</td>
+				<td class="value">2500</td>
+				<td>The interval of showing a photo in gallery</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">photoScaled</td>
+				<td class="type">boolean</td>
+				<td class="value">false</td>
+				<td>Whether to scale the photo to <font>width, height</font>. If not, it will show its original dimension.</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">photoFade</td>
+				<td class="type">boolean</td>
+				<td class="value">true</td>
+				<td>Whether to use fadeIn to show the photo after loaded</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">imgError</td>
+				<td class="type">string</td>
+				<td class="value">'Failed to load image.'</td>
+				<td>The error message when failed to load image.</td>
+				<td>This could be override by <font>$.msgboxI18N.en.imgError</font></td>
+			</tr>
+			<tr>
+				<td class="key">xhrError</td>
+				<td class="type">string</td>
+				<td class="value">Failed to load URL.</td>
+				<td>The error message when failed to load an ajax URL.</td>
+				<td>This could be override by <font>$.msgboxI18N.en.xhrError</font></td>
+			</tr>
+			<tr>
+				<td class="key">onOpen</td>
+				<td class="type">function</td>
+				<td class="value"></td>
+				<td>The callback when msgbox is opened</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">onClose</td>
+				<td class="type">function</td>
+				<td class="value"></td>
+				<td>The callback when msgbox is closed</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">onLoad</td>
+				<td class="type">function</td>
+				<td class="value"></td>
+				<td>The callback when the content is loaded</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="key">onBeforeClose</td>
+				<td class="type">function</td>
+				<td class="value"></td>
+				<td>The callback just before the close triggers. The close will be cancelled when it returns <font>false</font>.</td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<h2>API</h2>
+		<p>As in Full Settings mentioned, we use <font>$.msgbox()</font> and <font>$(SELECTOR).msgbox()</font> to retrieve the msgbox.
+		We can also use <font>$.msgbox(id)</font> to retrieve a msgbox when deal with multiple instances. Once got the object, we can call
+		the API in this wah: <font>$.msgbox().close()</font> or <font>$(SELECTOR).msgbox().close()</font>
+		<p>In all the callbacks, this will refer to the msgbox object.</p>
+		<p><b>NOTICE: </b>When initialize a msgbox: <font>$(SELECTOR).msgbox({...})</font>, it will return a jQuery object to keep chaining, instead of a msgbox object.</p>
+		</p>
+		<table class="doctable" cellpadding="4" cellspacing="1" width="100%">
+			<tr>
+				<th>API</th>
+				<th>Arguments</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td class="key">enableDrag</td>
+				<td class="value"></td>
+				<td>To enable dragging</td>
+			</tr>
+			<tr>
+				<td class="key">disableDrag</td>
+				<td class="value"></td>
+				<td>To disable dragging</td>
+			</tr>
+			<tr>
+				<td class="key">enableResize</td>
+				<td class="value"></td>
+				<td>To enable resizing</td>
+			</tr>
+			<tr>
+				<td class="key">disableResize</td>
+				<td class="value"></td>
+				<td>To disable resizing</td>
+			</tr>
+			<tr>
+				<td class="key">flash</td>
+				<td class="value">opacity(number): the opacity to change, <br />interval(number): the interval between each opacity change<br />
+				callback(function): the callback</td>
+				<td>To flash the title by changing the opacity 2 times (simulation of windows)</td>
+			</tr>
+			<tr>
+				<td class="key">play</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To play the gallery. If the gallery is already playing, it will pause.</td>
+			</tr>
+			<tr>
+				<td class="key">next</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To show the next photo in the gallery.</td>
+			</tr>
+			<tr>
+				<td class="key">prev</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To show the previous photo in the gallery</td>
+			</tr>
+			<tr>
+				<td class="key">pause</td>
+				<td class="value"></td>
+				<td>To pause the gallery playing</td>
+			</tr>
+			<tr>
+				<td class="key">open</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To open the msgbox</td>
+			</tr>
+			<tr>
+				<td class="key">val</td>
+				<td class="value"></td>
+				<td>To return the value of msgbox. The value is set in prompt or confirm</td>
+			</tr>
+			<tr>
+				<td class="key">close</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To close the msgbox</td>
+			</tr>
+			<tr>
+				<td class="key">remove</td>
+				<td class="value"></td>
+				<td>To remove the msgbox. (click the trigger, msgbox will no show any more and new msgbox will not be generated either.)</td>
+			</tr>
+			<tr>
+				<td class="key">title</td>
+				<td class="value">t(string): the new title</td>
+				<td>To return the title (if <font>t</font> is not specified), or to set a new title.</td>
+			</tr>
+			<tr>
+				<td class="key">reload</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To reload the content of the msgbox</td>
+			</tr>
+			<tr>
+				<td class="key">focus</td>
+				<td class="value">callback(function): the callback</td>
+				<td>If msgbox is minimized, restore it; if it is closed, open it; if it is opened, flash the title.</td>
+			</tr>
+			<tr>
+				<td class="key">restore</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To restore the msgbox from minimized or maximized.</td>
+			</tr>
+			<tr>
+				<td class="key">min</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To minimize the msgbox. If it is already minimized, restore it.</td>
+			</tr>
+			<tr>
+				<td class="key">max</td>
+				<td class="value">callback(function): the callback</td>
+				<td>To maximize the msgbox. If it is already minimized, restore it.</td>
+			</tr>
+			<tr>
+				<td class="key">content</td>
+				<td class="value">c(string): the new content</td>
+				<td>To get the content(html) (if <font>c</font> is not specified), or to set the new content(html).</td>
+			</tr>
+		</table>
+		
+		<p>Static</p>
+		<table class="doctable" cellpadding="4" cellspacing="1" width="100%">
+			<tr>
+				<th>API</th>
+				<th>Arguments</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td class="key">$.msgbox.defaults</td>
+				<td class="value">options(object)={}</td>
+				<td>Change the default settings</td>
+			</tr>
+			<tr>
+				<td class="key">$.msgbox.closeAll</td>
+				<td class="value">callback(function)</td>
+				<td>Close all the msgboxes generated by $.msgbox. Callback will be called after all msgboxes closed.</td>
+			</tr>
+			<tr>
+				<td class="key">$.msgbox.restoreAll</td>
+				<td class="value">callback(function)</td>
+				<td>Restore all the msgboxes generated by $.msgbox. Callback will be called after all msgboxes restored from minimized or maximized.</td>
+			</tr>
+			<tr>
+				<td class="key">$.msgbox.minAll</td>
+				<td class="value">callback(function)</td>
+				<td>Minimize all the msgboxes generated by $.msgbox. Callback will be called after all msgboxes minimized.</td>
+			</tr>
+		</table>
+		
+		<h2>Internationalization</h2>
+		<p>Refer the file <font>jquery.msgbox.i18n.js</font> and specify a language <font>lang</font> to use i18n.</p>
+		<table class="doctable" cellpadding="4" cellspacing="1" width="100%">
+			<tr>
+				<th>Key</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td class="key">OK</td>
+				<td>The value of the 'OK' button</td>
+			</tr>
+			<tr>
+				<td class="key">Cancel</td>
+				<td>The value of the 'Cancel' button</td>
+			</tr>
+			<tr>
+				<td class="key">Loading</td>
+				<td>The message when an iframe is loading</td>
+			</tr>
+			<tr>
+				<td class="key">Play/Pause</td>
+				<td>The title of the 'play' icon</td>
+			</tr>
+			<tr>
+				<td class="key">Next</td>
+				<td>The title of the 'next' icon</td>
+			</tr>
+			<tr>
+				<td class="key">Prev</td>
+				<td>The title of the 'prev' icon</td>
+			</tr>
+			<tr>
+				<td class="key">Minimize</td>
+				<td>The title of the 'min' icon</td>
+			</tr>
+			<tr>
+				<td class="key">Maximize</td>
+				<td>The title of the 'max' icon</td>
+			</tr>
+			<tr>
+				<td class="key">Close</td>
+				<td>The title of the 'close' icon</td>
+			</tr>
+			<tr>
+				<td class="key">xhrError</td>
+				<td>The error message when failed to load the ajax URL.</td>
+			</tr>
+			<tr>
+				<td class="key">imgError</td>
+				<td>The error message when failed to load the image.</td>
+			</tr>
+		</table>
+	</div>
+	<div id="footer">
+		<a href="https://github.com/pwwang" target="_blank">Fork me on github</a> &nbsp; | &nbsp;
+		<a href="http://pwwang.com" target="_blank">My blog</a>
+	</div>
+</body>
+</html>

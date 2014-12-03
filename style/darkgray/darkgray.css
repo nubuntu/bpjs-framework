@@ -1,0 +1,230 @@
+.darkgrayKTV
+{
+	white-space:nowrap;
+}
+.darkgrayKTV *
+{
+}
+/*ktvLI: TreeNode*/
+.darkgrayKTV .ktvLI
+{
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	line-height:16px;
+	font-size:11px;
+}
+/*ktvImage: Image in the node content*/
+.darkgrayKTV .ktvImage
+{
+	vertical-align:text-bottom;
+}
+
+/*ktvText: Text in the node content*/
+.darkgrayKTV .ktvText
+{
+	/*border:1px solid transparent;*/
+	color:#333333;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.273em;
+	padding-left:2px;
+	padding-right:2px;		
+}
+
+/*ktvOver: Apply to treenode content when mouse is over*/
+.darkgrayKTV .ktvOver .ktvText
+{
+	cursor:default;
+	border:1px solid #B4B4B4;
+	background-color:#DFDFDF;
+}
+/*ktvOver: Apply to treenode content when mouse is selected*/
+.darkgrayKTV .ktvSelected .ktvText
+{
+	border:1px solid #191919;
+	background-image:url('bg.gif');
+	color:#FFFFFF;
+}
+
+/*ktvPM: PlusMinus button in general*/
+.darkgrayKTV .ktvPM
+{
+	height:11px;
+	width:11px;
+	margin:3px 8px 0pt -16px;
+	cursor:pointer;
+	display:inline-block;
+	font-size:0pt;
+	padding:0pt;
+	vertical-align:top;
+}
+html>body .darkgrayKTV .ktvPM
+{
+	display:-moz-inline-box;
+}
+/*ktvMinus: Minus button in detail*/
+.darkgrayKTV .ktvMinus
+{
+	background:url(pm.gif) no-repeat scroll 0pt -8pt;
+}
+
+/*ktvPlus: Plus button in detail*/
+.darkgrayKTV .ktvPlus
+{
+	background:url(pm.gif) no-repeat scroll 0pt 0pt;
+}
+
+/*ktvLoading: Ajax loading image*/
+.darkgrayKTV .ktvLoading
+{
+	width:16px;
+	height:16px;
+	background:url(loading.gif);
+	display:inline-block;
+	vertical-align:top;
+}
+html>body .darkgrayKTV .ktvLoading
+{
+	display:-moz-inline-box;
+}
+
+/*ktvEdit: Edit input when node is edited*/
+.darkgrayKTV .ktvEdit
+{
+	border:1px solid #6699cc;
+	background-color:#ccddee;
+	color:#000000;
+	font-family:tahoma,verdana,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+}
+
+/*ktvEdit: Dump treenode when drag*/
+.darkgrayKTV .ktvDrag
+{
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	opacity:0.5;
+}
+
+/*ktvDrop: Apply to treenode content when a node is selected to drop*/
+.darkgrayKTV .ktvDrop .ktvText
+{
+	border:1px solid #6699cc;
+	background-color:#ccddee;
+	cursor:darkgray;
+}
+
+
+/*ktvTop: Node on top*/
+/*ktvMid: Node in middle*/
+/*ktvBot: Node on bottom*/
+
+.darkgrayKTV .ktvMid, 
+.darkgrayKTV .ktvTop, 
+.darkgrayKTV .ktvBot
+{
+	padding-left:20px;
+}
+
+/*ktvUL: Node container*/
+.darkgrayKTV .ktvUL
+{
+	margin:0px;
+	padding-left:0px;
+}
+
+
+.darkgrayKTV .ktvUL .ktvUL,
+.darkgrayKTV .ktvUL .ktvUL .ktvUL
+{
+	margin:0px;
+	padding-left:20px;
+}
+
+
+/*ktvNoPadding: When showplusminus=false or rootnode visible = false*/
+.darkgrayKTV .ktvNoPadding .ktvUL
+{
+	margin:0px;
+	padding-left:0px;
+}
+
+.darkgrayKTV .ktvNoPadding .ktvUL .ktvUL
+{
+	margin:0px;
+	padding-left:20px;
+}
+
+/*ktvInv: Make root node invisible*/
+.darkgrayKTV .ktvInv
+{
+	display:none;
+}
+
+/*ktvNoPM: Make root node does not show PlusMinus button*/
+.darkgrayKTV .ktvNoPM
+{
+	padding-left:0px;
+	background:none;
+}
+.darkgrayKTV .ktvNoPM .ktvPM
+{
+	display:none;
+}
+
+
+
+/*ktvLines: Render tree with lines---------------------*/
+
+.darkgrayKTV .ktvLines .ktvLI
+{
+	background:url(v.gif) no-repeat scroll 0pt;	
+}
+
+.darkgrayKTV .ktvLines .ktvUL
+{
+	background:url(v.gif) no-repeat scroll 0pt;
+}
+
+.darkgrayKTV .ktvLines .ktvLast .ktvBot
+{
+	background:url(L.gif) no-repeat scroll 0pt;
+}
+
+
+.darkgrayKTV .ktvLines .ktvLast,
+.darkgrayKTV .ktvLines .ktvLast .ktvUL
+{
+	background:none;
+}
+
+.darkgrayKTV .ktvLines .ktvTop,
+.darkgrayKTV .ktvLines .ktvMid,
+.darkgrayKTV .ktvLines .ktvBot
+{
+	background:url(mid.gif) no-repeat scroll 0pt;
+}
+
+.darkgrayKTV .ktvLines .ktvLast .ktvTop
+{
+	background:url(horizon.gif) no-repeat scroll 0pt;
+}
+
+.darkgrayKTV .ktvLines .ktvLast .ktvNoPM
+{
+	background:none;
+}
+/*-------------------------*/
+
+
+
+

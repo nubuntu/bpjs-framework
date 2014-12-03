@@ -1,0 +1,4 @@
+<?php
+$this->pagetitle="Home";
+
+?>
