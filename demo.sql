@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2014 at 11:07 AM
+-- Generation Time: Dec 11, 2014 at 11:14 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -15827,7 +15827,7 @@ INSERT INTO `menu` (`id`, `nama`, `link`, `style`) VALUES
 (4, 'Data User', 'site/user', 'fa fa-users'),
 (5, 'Menu', 'site/menu', 'fa fa-bars'),
 (6, 'Dashboard', 'site/profile', 'fa fa-home '),
-(10, 'Form Add Customer', 'site/form_customer', 'fa fa-user');
+(10, 'Form Add Film', 'site/form_film', 'fa fa-user');
 
 -- --------------------------------------------------------
 

@@ -3,7 +3,7 @@ $db = $this->base->db;
 $post = $this->base->posts;
 $app = new \NC\asset\App;
 $form = new \NC\system\Form;
-$form->setTitle("Customer ['new']");
+$form->setTitle("Add Film");
 $form->jform['columns']=2;
 $form->showkey=false;
 $form->setTable($db,"film","film_id");
