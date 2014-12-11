@@ -1,0 +1,1427 @@
+.jform{
+  margin:0 auto;
+background-color:#FFFFFF;font-size:14px;font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;color:#34495E;max-width:100%;min-width:150px  
+}
+.jform>div,
+.jform>.title{
+  margin: 8px;
+}
+
+.jform .error-field .required{
+  color:#FF9999;
+}
+.jform .error-field input,
+.jform .error-field input[type=text],
+.jform .error-field input[type=password],
+.jform .error-field input[type=email],
+.jform .error-field input[type=url],
+.jform .error-field input[type=date],
+.jform .error-field input[type=number],
+.jform .error-field input[type=tel],
+.jform .error-field textarea{
+  border-color:#D893A1;
+  background-color: #FBE6F2;
+}
+.jform label.error{
+  display:inline-block;
+  font-size:0.9em;
+}
+.jform .error,
+.jform .error #recaptcha_widget_div{
+  padding: 3px 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  border-radius: 4px;
+
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #c09853;
+}
+.jform .error h4 {
+  color: #b94a48;
+  margin: 0;
+}
+
+.jform .error .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  line-height: 20px;
+}
+.jform .column{
+  float:left; 
+}
+/* width = parseInt(100/columns.length)*/
+.jform .column1{ width:100%;}
+.jform .column2{ width:50%; }
+.jform .column3{ width:33%; }
+.jform .column4{ width:25%; }
+.jform .column5{ width:20%; }
+
+
+
+.jform .large{
+  width: 100%;
+  *width: 94%;
+}
+.jform .medium{
+  width: 50%;
+  *width: 47%;
+}
+.jform .small{
+  width: 25%;
+  *width: 23%;
+}
+
+.jform textarea.large{
+  width: 100%;
+  *width: 94%;
+  height: 20em;
+}
+.jform textarea.medium{
+  width: 100%;
+  *width: 94%;
+  height: 10em;
+}
+.jform textarea.small{
+  width: 100%;
+  *width: 94%;
+  height: 5.5em;
+}
+
+/* address select style */
+.jform .element-address .country {
+  position: relative;
+}
+
+.frmd{
+  display:none;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+
+.blurBg,
+.blurBg-true{
+  background-attachment: fixed;
+  background-image:
+    -webkit-linear-gradient(5deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+    -webkit-radial-gradient(40% 60%, ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+    -webkit-radial-gradient(50% -10%, circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+    -webkit-radial-gradient(100% 0%, ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+    -webkit-radial-gradient(0% 0%, ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+    -webkit-radial-gradient(90% 60%, ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+    -webkit-radial-gradient(20% 10%, circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);
+  
+  background-image:
+    linear-gradient(85deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+    radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+    radial-gradient(50% -10%,circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+    radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+    radial-gradient(0% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+    radial-gradient(90% 60%,ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+    radial-gradient(20% 10%,circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);/* top left black */
+  /*
+    radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%),
+    radial-gradient(50% -10%,circle closest-corner, rgba(255, 255, 255, 0.3) 20%, rgba(255, 255, 255, 0) 50%),
+    radial-gradient(0% 100%,ellipse farthest-side, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 20%),
+    radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 20%),
+    radial-gradient(1% 2%,circle farthest-side, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 20%);
+  */
+}
+
+#jform-info {
+  display: block;
+  width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  color: #c09853;
+  font-size: 12px;
+  max-width: 100%;
+}/*
+
+
+Solid style
+
+
+*/
+@font-face {
+  font-family: jform;
+  src:url('jform.eot');
+  src:url('jform.eot?#iefix') format('embedded-opentype'),
+  url('jform.ttf') format('truetype'),
+  url('jform.woff') format('woff'),
+  url('jform.svg#jform') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'icons';
+  src: url('icons.eot');
+  src: url('icons.eot#iefix') format('embedded-opentype'),
+       url('icons.woff') format('woff'),
+       url('icons.ttf') format('truetype'),
+       url('icons.svg#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.jform{
+  font-size: 1em;
+  line-height: 1.231;
+
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+.jform label.title{
+  font-size: 1em;
+  font-weight: 500;
+  width: auto;
+}
+.jform input[type=button]{
+  outline: none;
+  font-size: 1em;
+}
+.jform input[type=submit]{
+  outline: none;
+  font-size: 1.2em;
+}
+.jform>div{
+  position: relative;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.jform h2 {
+  margin: 0.2em 0;
+  font-size: 2em;
+  font-weight: 300;
+  color: #fff;
+}
+.jform h3.title {
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+.jform h3.section-break-title {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.jform label {
+  display: block;
+  margin-bottom: 3px;
+  clear: both;
+}
+
+.jform div, .jform span, .jform label, .jform input, .jform textarea, .jform select, .jform button, .jform ul, .jform li, .jform a{
+  font-family: inherit;
+  color: inherit;
+}
+/* Global Declaration */
+
+/*
+CORE FUNCTIONALITY 
+
+Not advised to edit stuff below this line
+-----------------------------------------------------
+*/
+
+
+/* submit + title */
+.jform div.submit,
+.jform div.title{
+  margin: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.jform div.submit{
+  vertical-align: middle;
+  text-align: right;
+  border-top: 2px solid #d6dbdf;
+  background-color: #F3F5FA;
+}
+.jform div.title {
+  border-radius: 5px 5px 0 0;
+}
+.jform div.title h2{
+  margin-left: 27px;
+}
+
+
+/* Button & submit*/
+.jform input[type=button],
+.jform input[type=submit]{
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 1px;
+  color: #fff;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  background: #fff;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: normal;
+
+  border: 2px solid #bdc3c7;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  border-radius:3px;
+  box-shadow: inset 0 -0.3em 0 rgba(0, 0, 0, 0.2);
+}
+
+.jform input[type=button][disabled] {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.jform input[type=submit]{
+  text-align: center;
+  opacity: 1;
+  color: #ffffff;
+  border: none;
+  right: 20px;
+  margin-right: 27px;
+  padding: 11px 41px;
+}
+
+.jform input[type=submit]:hover{
+  text-decoration: none;
+}
+.jform input[type=submit]:active{
+  box-shadow: inset 0 -0.15em 0 rgba(0, 0, 0, 0.2);
+}
+
+/* File input */
+.jform .element-file label{
+  position: relative;
+}
+.jform .element-file .title{
+  position: static;
+}
+.jform .element-file .button {
+  z-index: 1;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  float: none;
+  font-size: 1em;
+  color: #fff;
+
+  padding: 1.8% 1.2em 0 1.2em;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: inset 0 -0.3em 0 rgba(0, 0, 0, 0.2);
+
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+}
+.jform .element-file .button:active{
+  box-shadow: inset 0 -0.15em 0 rgba(0, 0, 0, 0.2);
+}
+.jform .element-file .file_text{
+  overflow: hidden;
+  color: #A9A9A9;
+  background-color: #fff;
+  -webkit-transition: border-color .25s ease-in-out;
+  transition: border-color .25s ease-in-out;
+}
+
+.jform .element-file .file_input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  width: 100%;
+}
+* html .jform .element-file .file_input,
+*+html .jform .element-file .file_input{
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  width: auto;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+* html .jform .element-file .button,
+*+html .jform .element-file .button{
+  display: none;
+}
+* html .jform .element-file label,
+*+html .jform .element-file label,
+* html .jform .element-file .file_text,
+*+html .jform .element-file .file_text{
+  border: none;
+}
+* html .jform .element-file .title,
+*+html .jform .element-file .title{
+  display: block;
+}
+
+
+/* Radio & checkbox */
+.jform div.element-checkbox, .jform div.element-radio{
+  overflow:hidden;
+  line-height: 2.2;
+}
+.jform input[type=checkbox],
+.jform input[type=radio]{
+  z-index:1;
+  position:absolute;
+  float: left;
+  opacity:0.01;
+  font-size: 1.3em;
+  width: 1.2em;
+  height: 1em;
+  margin: 0;
+  cursor: pointer;
+}
+
+.jform input[type=radio]+span,
+.jform input[type=checkbox]+span{
+  margin-right:-19px;
+  padding-top: 0;
+  z-index:0;
+  position: relative;
+  left: 0;
+  top: 0;
+  vertical-align:top;
+  font-size: 1em;
+  line-height: 1.3;
+  cursor: pointer;
+}
+.jform input[type=checkbox]+span:before{
+  position: relative;
+  font-family: jform;
+  margin-right: 0.2em;
+  color: transparent;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align:top;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* checkbox */
+.jform input[type=checkbox]+span:before{
+  content: "\e004";
+  font-size: 0.65em;
+  padding: 0.3em;
+  font-weight: bold;
+  margin-right: 0.6em;
+  line-height: 2;
+  border-style: solid;
+  border-width: 0.3em;
+  -webkit-transition: border-color .5s ease-in-out;
+  transition: border-color .5s ease-in-out;
+  border-radius:0.3em;
+}
+
+/* radio */
+.jform input[type=radio]+span:before {
+  position: relative;
+  font-family: jform;
+  margin-right: 0.2em;
+  color: transparent;
+  font-size: 1.4em;
+  line-height: 1;
+  vertical-align:top;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: color .5s ease-in-out;
+  transition: color .5s ease-in-out;
+}
+.jform input[type=radio]+span:before{
+  content: "\e001";
+}
+.jform input[type=radio]:checked+span:before{
+  content: "\e000";
+}
+
+
+/* rating */
+.jform .rating {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+}
+.jform .rating-input {
+  display: none;
+}
+.jform .rating-star:after {
+  font-family: jform;
+  font-size: 2em;
+  -webkit-transition: color .5s ease-in-out;
+  transition: color .5s ease-in-out;
+}
+.jform .rating:hover .rating-star:hover:after,
+.jform .rating:hover .rating-star:hover ~ .rating-star:after,
+.jform .rating-input:checked ~ .rating-star:after {
+  content: '\e006';
+}
+.jform .rating-star,
+.jform .rating:hover .rating-star {
+  position: relative;
+  cursor: default;
+  clear: none;
+  float: right;
+  display: block;
+  width: 2.4em;
+  height: 2em;
+}
+.jform .rating-star:after,
+.jform .rating:hover .rating-star:after {
+  content: '\e007';
+}
+
+
+
+.jform input[type=text],
+.jform input[type=password],
+.jform input[type=email],
+.jform input[type=url],
+.jform input[type=date],
+.jform input[type=number],
+.jform input[type=tel],
+.jform textarea,
+.jform .element-file .file_text,
+.jform select{
+  border-style: solid;
+  border-width: 2px;
+  border-color: #bdc3c7;
+  -webkit-transition: border-color 0.5s ease-in-out;
+  transition: border-color 0.5s ease-in-out;
+  border-radius:3px;
+
+  padding: 10px 10px 9px 2.3em;
+  
+  outline:none;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: normal;
+  
+  font-size: 1em;
+}
+.jform .element-address input[type=text],
+.jform .element-group input[type=text],
+.jform .element-name input[type=text],
+.jform .element-file .file_text,
+.jform textarea{
+  width: 100%;
+  *width: 94%;
+}
+.jform textarea{
+  height: auto;
+}
+.jform  select{
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+.jform .element-address input[type=text] {
+  margin-bottom: 6px;
+}
+
+
+
+/* icons */
+/*
+\e800 - icon-text
+\e801 - icon-select
+\e802 - icon-date
+\e803 - icon-num
+\e804 - icon-file
+\e805 - icon-email
+\e806 - icon-url
+\e807 - icon-pass
+\e808 - icon-phone
+\e809 - icon-street
+\e80A - icon-city
+\e80B - icon-profile
+*/
+
+.jform .item-cont,
+.jform .element-address .country,
+.jform .element-name .nameFirst,
+.jform .element-name .nameLast,
+.jform .element-group .child,
+.jform .element-address .addr1,
+.jform .element-address .addr2,
+.jform .element-address .city,
+.jform .element-address .state,
+.jform .element-address .zip {
+  position: relative;
+}
+
+.jform .icon-place:before {
+  position: absolute;
+  font: 1em 'icons';
+  vertical-align: top;
+  top: 15px;
+  left: 0.9em;
+  pointer-events: none;
+  color: #A2A6A8;
+  z-index: 2;
+}
+
+.jform .element-input .item-cont .icon-place:before,
+.jform .element-textarea .item-cont .icon-place:before {
+  content: '\e800';
+}
+.jform .element-select .item-cont .icon-place:before,
+.jform .element-multiple .item-cont .icon-place:before,
+.jform .element-address .country .icon-place:before {
+  top: 12px;
+  content: '\e801';
+}
+.jform .element-date .item-cont .icon-place:before {
+  content: '\e802';
+}
+.jform .element-address .item-cont .icon-place:before {
+  content: '\e80A';
+}
+.jform .element-number .item-cont .icon-place:before,
+.jform .element-address .zip .icon-place:before {
+  content: '\e803';
+}
+.jform .element-file .item-cont .icon-place:before {
+  content: '\e804';
+}
+.jform .element-email .item-cont .icon-place:before {
+  content: '\e805';
+}
+.jform .element-url .item-cont .icon-place:before {
+  content: '\e806';
+}
+.jform .element-password .item-cont .icon-place:before {
+  content: '\e807';
+}
+.jform .element-phone .item-cont .icon-place:before {
+  content: '\e808';
+}
+.jform .element-name .item-cont .icon-place:before,
+.jform .element-name .nameFirst .icon-place:before,
+.jform .element-name .nameLast .icon-place:before {
+  content: '\e80B';
+}
+.jform .element-address .addr1 .icon-place:before,
+.jform .element-address .addr2 .icon-place:before {
+  top: 0;
+  content: '\e809';
+}
+.jform .element-address .city .icon-place:before,
+.jform .element-address .state .icon-place:before {
+  content: '\e80A';
+}
+
+
+
+/* NAME last first */
+.jform .element-name .nameFirst{
+  width: 40%;
+  *width: 39%;
+  left: 0;
+  display: inline-block;
+  margin-right: 5%;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+.jform .element-name .nameLast{
+  width: 55%;
+  *width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+.jform .element-group .child{
+	left: 0;
+  width:auto;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+/* ADDRESS */
+.jform .element-address .city,
+.jform .element-address .zip{
+  width: 47%;
+  *width: 44%;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  vertical-align: top;
+  margin-right: 6%;
+}
+.jform .element-address .state,
+.jform .element-address .country{
+  width: 47%;
+  *width: 44%;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  vertical-align: top;
+}
+.jform .element-address .country select{
+  cursor: pointer;
+}
+.jform .element-address label,
+.jform .element-group label,
+.jform .element-name label{
+  font-size: 1em;
+}
+.jform .element-address label.title,
+.jform .element-group label.title
+.jform .element-name label.title{
+  font-size: 1em;
+}
+
+/* type number */
+.jform input[type=number]::-webkit-inner-spin-button, 
+.jform input[type=number]::-webkit-outer-spin-button{ 
+  -webkit-appearance: none;
+}
+
+/* recaptcha */
+.jform .recaptchatable,
+.jform .recaptchatable #recaptcha_image,
+.jform .recaptchatable #recaptcha_challenge_field_holder input{
+  border-collapse: separate !important;
+  border: 2px solid #BDC3C7 !important;
+  border-radius: 6px;
+}
+.jform .recaptchatable #recaptcha_image img{
+  border-color: transparent;
+  border-radius: 6px;
+}
+
+/* ERRORs */
+.jform .error,
+.jform .error #recaptcha_widget_div{
+  display: block;
+  background-color: #FBDBCF;
+  text-shadow: none;
+  border: none;
+  padding: 15px;
+  border-radius: 3px;
+  margin-left: 25px;
+  line-height: 1;
+}
+.jform label.error {
+  line-height: 1;
+  display: block;
+}
+.jform .error-label {
+  line-height: 1;
+  color: #900;
+}
+.tooltip {
+  position: relative;
+  margin-top: 6px;
+}
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tooltip.bottom .tooltip-arrow {
+  top: -8px;
+  left: 20px;
+  border-bottom-color: #FBDBCF;
+  border-width: 0 8px 8px;
+}
+.alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  border-radius: 4px;
+}
+.alert,
+.alert h4 {
+  color: #900;
+}
+
+.alert h4 {
+  margin: 0;
+}
+
+.alert .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  line-height: 20px;
+}
+
+
+.alert-success {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.alert-success h4 {
+  color: #468847;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.alert-info {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.alert-info h4 {
+  color: #3a87ad;
+}
+
+
+
+
+@media all and (max-width:400px){
+  .jform .element-radio .column,
+  .jform .element-checkbox .column,
+  .jform .element-name .nameFirst,  
+  .jform .element-name .nameLast,
+  .jform .element-group .child,
+  .jform .element-address .city,
+  .jform .element-address span.state,
+  .jform .element-address .zip,
+  .jform .element-address .country{
+    width: 100%;
+    display: block;
+    margin-right: 0;
+  }
+}/* .jform color scheme begin */
+/*
+    first: #3498DB;
+    second: #2372A7;
+    third: #70B6E5;
+*/
+
+.jform input[type=button]:focus,
+.jform input[type=button]:active,
+.jform input[type=button]:hover,
+.jform input[type=button][disabled] {
+  border-color: #3498DB;
+}
+.jform div.title{
+  background-color: #3498DB;
+  border-top: 1px solid #70B6E5;
+  border-bottom: 5px solid #2372A7;
+}
+
+.jform input[type=submit]{
+  background-color: #3498DB;
+}
+
+.jform input[type=submit]:hover{
+  background-color: #70B6E5;
+}
+.jform input[type=submit]:active{
+  background-color: #2372A7;
+}
+
+/* File input */
+.jform .element-file .button {
+  background-color: #3498DB;
+}
+.jform .element-file .file_text{
+  border-color: #bdc3c7;
+}
+.jform .element-file label:hover .file_text{
+  border-color: #70B6E5;
+}
+.jform .element-file .button:hover {
+  background-color: #70B6E5;
+}
+.jform .element-file .button:active {
+  background-color: #2372A7;
+}
+.jform .element-file label:active .file_text{
+  border-color: #3498DB;
+}
+
+/* element-submit + element-text */
+.jform > .submit,
+.jform > .title{
+  background-color: #bcc3ca;
+}
+.jform > .submit{
+  background-color: #edeff1;
+  border-top: 2px solid #d6dbdf;
+}
+
+/* checkbox & radio*/
+.jform input[type=checkbox]+span:before{
+  border-color: #bdc3c7;
+}
+.jform input[type=checkbox]:hover+span:before{
+  border-color: #70B6E5;
+}
+.jform input[type=checkbox]:checked+span:before{
+  color: #3498DB;
+  border-color: #3498DB;
+}
+
+/* radio */
+.jform input[type=radio]+span:before{
+  color: #bdc3c7;
+}
+.jform input[type=radio]:hover+span:before{
+  color: #70B6E5;
+}
+.jform input[type=radio]:checked+span:before{
+  color: #3498DB;
+}
+
+/* rating */
+.jform .rating-star:after,
+.jform .rating:hover .rating-star:after {
+  color: #bdc3c7;
+}
+.jform .rating:hover .rating-star:hover:after,
+.jform .rating:hover .rating-star:hover ~ .rating-star:after {
+  color: #70B6E5;
+}
+.jform .rating-input:checked ~ .rating-star:after {
+  color: #3498DB;
+}
+
+
+.jform input[type=text]:hover,
+.jform input[type=tel]:hover,
+.jform input[type=password]:hover,
+.jform input[type=email]:hover,
+.jform input[type=url]:hover,
+.jform input[type=date]:hover,
+.jform input[type=number]:hover,
+.jform input[type=file]:hover,
+.jform textarea:hover,
+.jform select:hover {
+  border-color: #70B6E5;
+}
+.jform input[type=text]:focus,
+.jform input[type=tel]:focus,
+.jform input[type=password]:focus,
+.jform input[type=email]:focus,
+.jform input[type=url]:focus,
+.jform input[type=date]:focus,
+.jform input[type=number]:focus,
+.jform input[type=file]:focus,
+.jform textarea:focus,
+.jform select:focus{
+  border-color: #3498DB;
+}
+
+
+
+/* element icons */
+.jform input:focus ~ .icon-place:before,
+.jform textarea:focus ~ .icon-place:before,
+.jform select:focus ~ .icon-place:before,
+.jform .select.open ~ .icon-place:before,
+.jform input[type=file]:focus ~ .icon-place:before,
+.jform .button:focus ~ .icon-place:before,
+.jform .file_text:focus ~ .icon-place:before {
+  color: #3498DB;
+}
+
+
+
+/* bootstrap select */
+.jform .dropdown-menu li.active > a,
+.jform .dropdown-menu li.selected > a,
+.jform .dropdown-menu li.active > a.highlighted,
+.jform .dropdown-menu li.selected > a.highlighted,
+.jform .dropdown-inverse li.active > a,
+.jform .dropdown-inverse li.selected > a {
+  background-color: #3498DB;
+}
+.jform .btn.btn-primary:hover,
+.jform .btn.btn-primary:focus,
+.jform .btn-group:focus .btn.btn-primary.dropdown-toggle {
+  border-color: #70B6E5;
+}
+.jform .btn.btn-primary:active,
+.jform .btn-group.open .btn.btn-primary.dropdown-toggle,
+.jform .btn.btn-primary.active,
+.jform .dropdown-menu li.active > a:hover,
+.jform .dropdown-menu li.selected > a:hover,
+.jform .dropdown-menu li.active > a.highlighted:hover,
+.jform .dropdown-menu li.selected > a.highlighted:hover,
+.jform .dropdown-menu li.active > a:focus,
+.jform .dropdown-menu li.selected > a:focus,
+.jform .dropdown-menu li.active > a.highlighted:focus,
+.jform .dropdown-menu li.selected > a.highlighted:focus {
+  border-color: #3498DB;
+}
+.jform .dropdown-arrow {
+  border-bottom: 8px solid #3498DB;
+}
+.jform .dropdown-menu {
+  border: 2px solid #3498DB;
+}
+
+
+
+
+/* datepicker */
+.datepicker {
+  border: 2px solid #3498DB;
+}
+.datepicker:before {
+  border-bottom: 7px solid #3498DB;
+}
+.datepicker td.active,
+.datepicker td.active:hover,
+.datepicker td.active:hover:hover,
+.datepicker td.active:focus,
+.datepicker td.active:hover:focus,
+.datepicker td.active:active,
+.datepicker td.active:hover:active,
+.datepicker td.active.active,
+.datepicker td.active:hover.active,
+.datepicker td.active.disabled,
+.datepicker td.active:hover.disabled,
+.datepicker td.active[disabled],
+.datepicker td.active:hover[disabled],
+.datepicker td.active:active,
+.datepicker td.active:hover:active,
+.datepicker td.active.active,
+.datepicker td.active:hover.active,
+.datepicker td span.active,
+.datepicker td span.active:hover,
+.datepicker td span.active:focus,
+.datepicker td span.active:active,
+.datepicker td span.active.active,
+.datepicker td span.active.disabled,
+.datepicker td span.active[disabled]{
+  color: #ffffff;
+  background-image: none;
+  background-color: #3498DB;
+}
+
+/* .jform color scheme begin end *//* 
+
+bootstrap 
+
+*/
+.jform .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-radius: 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+  border-radius: 3px;
+}
+
+.jform .dropdown-menu > li > a:hover,
+.jform .dropdown-menu > li > a:focus,
+.jform .dropdown-submenu:hover > a,
+.jform .dropdown-submenu:focus > a {
+  text-decoration: none;
+}
+
+.jform .btn-group {
+  position: relative;
+  display: inline-block;
+  *display: inline;
+  *margin-left: .3em;
+  white-space: nowrap;
+  vertical-align: middle;
+  *zoom: 1;
+}
+
+.jform .btn-group > .dropdown-menu{
+  font-size: 1em;
+}
+
+.jform .btn{
+  text-align: left;
+  border: 0;
+  cursor: pointer;
+
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px 9px 2.3em;
+
+  outline:none;
+
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: normal;
+  border-radius: 3px;
+
+  border: 2px solid #BDC3C7;
+  background-color: #fff;
+
+  font-size: 1em;
+}
+.jform .btn:active,
+.jform .btn-group.open .btn.dropdown-toggle,
+.jform .btn.active {
+  box-shadow: none;
+}
+.jform .btn.disabled,
+.jform .btn[disabled] {
+  background-color: #bdc3c7;
+  color: rgba(255, 255, 255, 0.75);
+  box-shadow: none;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+
+.jform .select {
+  width: 100%;
+}
+
+.jform .select .btn .filter-option {
+  position: absolute;
+  left: 2.4em;
+  right: 30px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.jform .select .btn .dropdown-toggle {
+  border-radius: 6px;
+}
+.jform .select .btn .dropdown-menu {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+.jform .select .btn .dropdown-menu li:not(.disabled) > a:hover small {
+  color: rgba(255, 255, 255, 0.004);
+}
+
+.jform .select .btn > .disabled,
+.jform .select .btn .dropdown-menu li.disabled > a {
+  cursor: default;
+}
+
+.jform .dropdown-menu {
+  overflow-x: hidden;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  width: 99%;
+  box-shadow: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden;
+}
+.jform .dropdown-menu.typeahead {
+  display: none;
+  opacity: 1;
+  visibility: visible;
+  width: auto;
+}
+.jform .open > .dropdown-menu {
+  margin-top: 8px;
+  opacity: 1;
+  visibility: visible;
+}
+.jform .dropdown-menu li:first-child dt + a {
+  border-radius: 0;
+}
+.jform .dropdown-menu li.active > a,
+.jform .dropdown-menu li.selected > a,
+.jform .dropdown-menu li.active > a.highlighted,
+.jform .dropdown-menu li.selected > a.highlighted,
+.jform .dropdown-menu li.active > a:hover,
+.jform .dropdown-menu li.selected > a:hover,
+.jform .dropdown-menu li.active > a.highlighted:hover,
+.jform .dropdown-menu li.selected > a.highlighted:hover,
+.jform .dropdown-menu li.active > a:focus,
+.jform .dropdown-menu li.selected > a:focus,
+.jform .dropdown-menu li.active > a.highlighted:focus,
+.jform .dropdown-menu li.selected > a.highlighted:focus {
+  color: #ffffff;
+}
+.jform .dropdown-menu li > a {
+  padding: 6px 15px 6px;
+  text-decoration: none;
+  *zoom: 1;
+  -webkit-backface-visibility: hidden;
+  display: block;
+  clear: both;
+  white-space: nowrap;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.jform .dropdown-menu li > a:before,
+.jform .dropdown-menu li > a:after {
+  display: table;
+  content: "";
+}
+.jform .dropdown-menu li > a:after {
+  clear: both;
+}
+.jform .dropdown-menu li > a.highlighted {
+  background: #c9cfd4;
+  color: #ffffff;
+}
+.jform .dropdown-menu li > a.highlighted:hover,
+.jform .dropdown-menu li > a.highlighted:focus {
+  background: #bac1c8;
+  color: #ffffff;
+}
+.jform .dropdown-menu li > a:before {
+  margin-top: 3px;
+}
+
+.jform .dropdown-menu li dt {
+  margin-bottom: 3px;
+  margin-top: 12px;
+  padding: 0 15px;
+}
+.jform .dropdown-inverse {
+  padding-top: 4px;
+}
+.jform .dropdown-inverse li {
+  margin: 0 4px -2px;
+}
+.jform .dropdown-inverse li:first-child > a,
+.jform .dropdown-inverse li:last-child > a {
+  border-radius: 0;
+  padding-bottom: 7px;
+}
+.jform .dropdown-inverse li.active > a,
+.jform .dropdown-inverse li.selected > a {
+  position: relative;
+  z-index: 1;
+  border-radius: 3px;
+}
+.jform .dropdown-inverse li dt {
+  padding-left: 11px;
+  padding-right: 11px;
+}
+.jform .dropdown-inverse li .divider {
+  margin-left: 11px;
+  margin-right: 11px;
+}
+.jform .dropdown-inverse li > a.highlighted {
+  background: #526476;
+}
+.jform .dropdown-inverse li > a.highlighted:hover,
+.jform .dropdown-inverse li > a.highlighted:focus {
+  background: #677786;
+}
+.jform .dropdown-inverse li .divider {
+  background-color: #526476;
+  border-bottom-color: #526476;
+}
+.jform .dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+.jform .dropdown-arrow {
+  margin-top: 0;
+  opacity: 0;
+  position: absolute;
+  left: 13px;
+  top: 100%;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden;
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  z-index: 10;
+}
+.jform .open > .dropdown-arrow {
+  margin-top: 0;
+  opacity: 1;
+}/*!
+ * Datepicker for Bootstrap
+ *
+ * Copyright 2012 Stefan Petre
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+.datepicker {
+  width: 14em;
+  position: absolute;
+  background-color: #fff;
+  color: #34495e;
+  font-size: 1em;
+  top: 0;
+  left: 0;
+  padding: 4px;
+  margin-top: 8px;
+  border-radius: 4px;
+  display: none;
+  z-index: 10;
+}
+.datepicker:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  position: absolute;
+  top: -9px;
+  left: 6px;
+}
+.datepicker:after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  position: absolute;
+  top: -6px;
+  left: 7px;
+}
+.datepicker > div {
+  display: none;
+}
+.datepicker table {
+  width: 100%;
+  margin: 0;
+}
+.datepicker td,
+.datepicker th {
+  text-align: center;
+  width: 2.9em;
+  border-radius: 4px;
+}
+.datepicker td.day:hover {
+  background: #eeeeee;
+  cursor: pointer;
+}
+.datepicker td.day.disabled {
+  color: #eeeeee;
+}
+.datepicker td.old,
+.datepicker td.new {
+  color: #999999;
+}
+.datepicker td.active,
+.datepicker td.active:hover {
+  color: #ffffff;
+  background-image: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.datepicker td span {
+  display: block;
+  width: 1.5em;
+  height: 1.7em;
+  line-height: 1.6;
+  float: left;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.datepicker .datepicker-months td span,
+.datepicker .datepicker-years td span {
+  width: 3.5em;
+  height: 3em;
+  line-height: 3;
+}
+.datepicker td span:hover {
+  background: #eeeeee;
+}
+.datepicker td span.active {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.datepicker td span.old {
+  color: #999999;
+}
+.datepicker thead tr:first-child th {
+  cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover {
+  background: #eeeeee;
+}
+.input-append.date .add-on i,
+.input-prepend.date .add-on i {
+  display: block;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+.jform-column{
+	-webkit-column-gap:40px; /* Chrome, Safari, Opera */
+	-moz-column-gap:40px; /* Firefox */
+	column-gap:40px;
+}
+.jform-column-2{
+	-webkit-column-count:2;
+	-moz-column-count:2;
+	column-count:2;
+}
+.jform-column-3{
+	-webkit-column-count:3;
+	-moz-column-count:3;
+	column-count:3;
+}
+.jform-column-4{
+	-webkit-column-count:4;
+	-moz-column-count:4;
+	column-count:4;
+}
+.jform-column-avoid{
+	padding:10px;
+overflow: hidden; /* Fix for firefox and IE 10-11  */
+-webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+-moz-column-break-inside:avoid; /* Current Firefox */
+column-break-inside:avoid;
+break-inside: avoid; /* IE 10+ */
+break-inside: avoid-column;
+}
+.jform-column .element-group label,
+.jform-column .element-group .jform-input{
+	width:20%;
+left: 0;
+display: inline-block;
+margin-right: 5%;
+vertical-align: top;
+zoom: 1;
+}

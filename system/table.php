@@ -33,6 +33,10 @@ class Table{
 	var $isquery=false;
 	var $query;
 	var $where=false;
+	var $joinedTable=array();
+	var $formCreated="function(event,data){data.form.enterNext()}";
+	var $formSubmitting="function(event,data){}";
+	var $formClosed="function(event,data){}";
 	public $base;
 	function &getObj(){
 		static $instance;
@@ -47,7 +51,7 @@ class Table{
 		}	
 		//$this->base      = \NC\base::getInstance();
 		$this->setUrl($_SERVER['REQUEST_URI']);
-		$this->setDiv("jtable-data");
+		$this->setDiv("jtable-data-".$this->randString());
 		$this->editinline = array("enable"=>false,"img"=>"");
 		$this->isdetail=false;
 		
@@ -55,6 +59,15 @@ class Table{
 		
 		
 	}
+	function randString($length = 10) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}	
 	function setUrl($url){
 		$this->url=$url;
 		$mark =strpos($url,"?") ? "&" : "?";
@@ -62,10 +75,12 @@ class Table{
 		$create = $url. $mark."action=create";
 		$update = $url. $mark."action=update";
 		$delete = $url. $mark."action=delete";
+		$ac = $url. $mark."action=autocomplete";
 		$this->action['listAction'] = $action;
 		$this->action['createAction'] = $create;
 		$this->action['updateAction']=$update;
-		$this->action['deleteAction']=$delete;		
+		$this->action['deleteAction']=$delete;
+		$this->action['autocompleteAction']=$ac;		
 	}
 	function setManual($url){
 		$mark =strpos($url,"?") ? "&" : "?";
@@ -83,6 +98,9 @@ class Table{
 	    $arg_list = func_get_args();
     	for ($i = 0; $i < $numargs; $i++) {
 			$m = ($arg_list[$i]);
+			if($m=="view"){
+				$this->jtable['view']=false;
+			}
 			unset($this->action[$m.'Action']);
     	}	
 		
@@ -124,6 +142,11 @@ class Table{
 		$this->jtable['toolbarsearch'] =$this->toolbarsearch;
 		$this->jtable['toolbarleft'] =$this->toolbarleft;
 		$this->jtable['maxtext'] =$this->maxtext;
+		$this->jtable['view']=true;
+		$this->jtable['formCreated']=$this->formCreated;
+		$this->jtable['formSubmitting']=$this->formCreated;
+		$this->jtable['formClosed']=$this->formClosed;
+
 		//$this->jtable['jqueryuiTheme']=true;
 		//$this->jtable['ajaxSettings']=array("contentType"=>"application/json; charset=utf-8");		
 		if(count($this->base)>=1){
@@ -188,7 +211,7 @@ class Table{
 		endif;
 
 		$html.= "
-		$('#".$this->div."').jtable(obj);";
+		$('.".$this->div."').jtable(obj);";
 		if(count($this->opt)>=1):
 		$html.="
 				 $('#ResetButton').click(function (e) {
@@ -198,7 +221,7 @@ class Table{
         });
  $('#LoadRecordsButton').click(function (e) {
             e.preventDefault();
-            $('#".$this->div."').jtable('load', {
+            $('.".$this->div."').jtable('load', {
                 q: $('#q').val(),
                 opt: $('#opt').val()
             });
@@ -208,7 +231,7 @@ class Table{
         $('#LoadRecordsButton').click();";
 		else:
             $html.="
-			$('#".$this->div."').jtable('load');";		
+			$('.".$this->div."').jtable('load');";		
 		endif;
 		return $html;
 	}
@@ -233,7 +256,7 @@ class Table{
     </form>
 </div>';
 	endif;
-		$html.='<div id="'.$this->div.'" style="width:100%;"></div>';
+		$html.='<div class="'.$this->div.'" style="width:100%;"></div>';
 		return $html;	
 	}
 	function getTitle($text){
@@ -249,6 +272,10 @@ class Table{
 			break;
 		}
 		return $text;	
+	}
+	function newField($title,$type="text"){
+		$field = array("title"=>$title,"width"=>"10%");
+		return $field;		
 	}
 	function getFields(){
 		$this->fields['record_number'] = array(
@@ -286,13 +313,15 @@ class Table{
 						$this->fields[$key] = array("title"=>$this->getTitle($key),"width"=>"10%","type"=>"checkbox",
 						"values"=>array(0=>"False",1=>"True"),"defaultValue"=>0);					
 					break;
-					case 'int':
+					/**
+					case 'int':						
 						$this->fields[$key] = array(
 							"title"=>$this->getTitle($key),
 							"width"=>"10%",
 							"type"=>"text",
 							"display"=>"function(data){return data.record.$key?data.record.$key.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.'):data.record.$key;}");					
 					break;
+					**/
 					default:
 						$this->fields[$key] = array("title"=>$this->getTitle($key),"width"=>"10%","type"=>"text");
 					break;					
@@ -328,7 +357,26 @@ class Table{
 				endif;
 		endif;	
 	}
+	function joinTable($table,$child,$parent,$fields){
+		for($i=0;$i<count($fields);$i++){
+			$this->fields[$fields[$i]] = array("title"=>$fields[$i],"width"=>"10%","joined"=>true);
+		}
+		$this->fields[$parent]['child']=$table;
+		$this->joinedTable[$table]=array("parent"=>$parent,"child"=>$child,"fields"=>$fields);
+	}
+	function autocomplete(){
+		$child = isset($_REQUEST['child']) ? $_REQUEST['child']:"";  
+		$keyword = isset($_REQUEST['keyword']) ? $_REQUEST['keyword']:"";
+	  	$table = $this->joinedTable[$child];
+		$q = "select ".implode(",",$table['fields'])." from $child where ".$table['child']."='".$keyword."'";
+		$this->db->setQuery($q);
+		$row = $this->db->getRow();
+		die(json_encode($row));
+	}
 	function data(){
+		if(count($this->joinedTable)>=1):
+			$this->dataJoin();
+		endif;
 		if($this->isquery):
 			$this->dataquery();
 		endif;	
@@ -363,7 +411,49 @@ class Table{
 		$total= $this->db->loadResult();
 		$q = "SELECT * FROM ".$this->table.$join.$where." order by ".$sort;  
 		$items = $this->db->getList($q,$offset,$rows);	
-		//print_r($items);
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Records'] = $items;
+		$jTableResult['TotalRecordCount'] = $total;
+		die(json_encode($jTableResult));
+	}
+	function dataJoin(){
+		$offset = isset($_REQUEST['jtStartIndex']) ? $_REQUEST['jtStartIndex']:0;  
+		$rows = isset($_REQUEST['jtPageSize']) ? $_REQUEST['jtPageSize']:10 ;
+		$q = isset($_REQUEST['q'])?$_REQUEST['q']:"";
+		$sort = isset($_REQUEST['jtSorting']) ? $_REQUEST['jtSorting']:$this->db->primary.' desc';
+		$opt = isset($_REQUEST['opt'])?$_REQUEST['opt']:array();
+		$options = isset($_REQUEST['options'])?$_REQUEST['options']:array();
+		$join = array();
+		$where ='';
+		$t=0;
+		
+		if($q){
+			for($i = 0; $i < count($opt); $i++):  
+				$fld = $opt[$i];
+				if(isset($options[$opt[$i]])){
+					$option = $options[$opt[$i]];
+					$fld="t$i.".$option['field'];
+					$join[] = " INNER JOIN ".$option['table']." as t$i on ".$this->table.".".$option['depend']."=t$i.".$option['depends'];
+				}
+				$where[] = $fld." like '%".$q[$i]."%'";
+			endfor;
+			$where = $this->where ? " where ".$this->where." And ".implode(" And ",$where) : " where ".implode(" And ",$where);
+		}else{
+			$where = $this->where ? " where ".$this->where:"";
+		}
+		$addedfield=array();
+		foreach($this->joinedTable as $key => $val){
+			$t++;
+			$join[] = " INNER JOIN ".$key." as j$t on ".$this->table.".".$val['parent']."=j$t.".$val['child'];
+			$addedfield[]="j$t.".implode(",j$t.",$val['fields']);
+		}
+		$join = count($join)<1?"":implode("",$join);  
+		$q = "select count(*) FROM ".$this->table.$join.$where;
+		$this->db->setQuery($q);
+		$total= $this->db->loadResult();
+		$q = "SELECT ".$this->table.".*,".implode(",",$addedfield)." FROM ".$this->table.$join.$where." order by ".$sort;  
+		$items = $this->db->getList($q,$offset,$rows);	
 		$jTableResult = array();
 		$jTableResult['Result'] = "OK";
 		$jTableResult['Records'] = $items;
@@ -472,6 +562,12 @@ class Table{
 		$mark =strpos($this->url,"?") ? "&" : "?";
 		$this->fields[$cmb]["options"] = "function(data){return '".$this->url.$mark."action=cmb&combo=".$cmb."';}";
 	}
+	function setComboCustom($custom,$cmb,$q){
+		$this->combo[$cmb] = $q;
+		$this->option = $cmb;
+		$mark =strpos($this->url,"?") ? "&" : "?";
+		$this->fields[$custom]["options"] = "function(data){return '".$this->url.$mark."action=cmb&combo=".$cmb."';}";
+	}	
 	function getoption(){
 		foreach($this->options as $key => $val):
 			$html="";
@@ -735,6 +831,24 @@ var obj$parent = ".$this->json_encok($table).";
 			}
 			$this->fields[$key] = $val;
 		}
-	}	
+	}
+	function setAkses($app,$tbl=""){
+		if($tbl==""){
+			$tbl=$this->table;
+		}
+		if(!$app->hasAccess(strtolower($tbl).".create")){
+			$this->disable("create");	
+		}
+		if(!$app->hasAccess(strtolower($tbl).".update")){
+			$this->disable("update");	
+		}
+		if(!$app->hasAccess(strtolower($tbl).".delete")){
+			$this->disable("delete");	
+		}
+		if(!$app->hasAccess(strtolower($tbl).".read")){
+			$this->disable("view");	
+		}		
+			
+	}
 }
 ?>
