@@ -88,7 +88,7 @@ background-color:#FFFFFF;font-size:14px;font-family:'Lucida Sans Unicode','Lucid
 .jform textarea.small{
   width: 100%;
   *width: 94%;
-  height: 5.5em;
+  height: 4em;
 }
 
 /* address select style */
@@ -212,9 +212,17 @@ Solid style
   margin-top: 1.5em;
 }
 .jform h3.section-break-title {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+	color: #3498DB; 
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;	
 }
+hr.separator{
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+	border: 10px; 
+	border-top: 2px solid #3498DB; 
+}
+
 
 .jform label {
   display: block;
@@ -244,10 +252,10 @@ Not advised to edit stuff below this line
   padding-bottom: 1em;
 }
 .jform div.submit{
-  vertical-align: middle;
-  text-align: right;
-  border-top: 2px solid #d6dbdf;
-  background-color: #F3F5FA;
+vertical-align: middle;
+text-align: right;
+border-top: 2px solid #E8E8E8;
+background-color: #F1F1F1;
 }
 .jform div.title {
   border-radius: 5px 5px 0 0;
@@ -379,7 +387,7 @@ Not advised to edit stuff below this line
 /* Radio & checkbox */
 .jform div.element-checkbox, .jform div.element-radio{
   overflow:hidden;
-  line-height: 2.2;
+  margin-top:10px;
 }
 .jform input[type=checkbox],
 .jform input[type=radio]{
@@ -509,7 +517,7 @@ Not advised to edit stuff below this line
   transition: border-color 0.5s ease-in-out;
   border-radius:3px;
 
-  padding: 10px 10px 9px 2.3em;
+  padding: 4px 2px 2px 1.5em;
   
   outline:none;
   -o-box-sizing: border-box;
@@ -576,8 +584,8 @@ Not advised to edit stuff below this line
   position: absolute;
   font: 1em 'icons';
   vertical-align: top;
-  top: 15px;
-  left: 0.9em;
+  top: 7px;
+  left: 0.4em;
   pointer-events: none;
   color: #A2A6A8;
   z-index: 2;
@@ -590,7 +598,7 @@ Not advised to edit stuff below this line
 .jform .element-select .item-cont .icon-place:before,
 .jform .element-multiple .item-cont .icon-place:before,
 .jform .element-address .country .icon-place:before {
-  top: 12px;
+  top: 7px;
   content: '\e801';
 }
 .jform .element-date .item-cont .icon-place:before {
@@ -835,17 +843,17 @@ Not advised to edit stuff below this line
   border-color: #3498DB;
 }
 .jform div.title{
-  background-color: #3498DB;
-  border-top: 1px solid #70B6E5;
-  border-bottom: 5px solid #2372A7;
+background-color: #46629E;
+border-top: 1px solid #FFFFFF;
+border-bottom: 5px solid #9A9DA0;
 }
 
 .jform input[type=submit]{
-  background-color: #3498DB;
+  background-color:#46629E;
 }
 
 .jform input[type=submit]:hover{
-  background-color: #70B6E5;
+  background-color: #233866;
 }
 .jform input[type=submit]:active{
   background-color: #2372A7;
@@ -1408,7 +1416,7 @@ bootstrap
 	column-count:4;
 }
 .jform-column-avoid{
-	padding:10px;
+	padding:3px;
 overflow: hidden; /* Fix for firefox and IE 10-11  */
 -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
 -moz-column-break-inside:avoid; /* Current Firefox */

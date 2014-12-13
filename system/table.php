@@ -34,6 +34,7 @@ class Table{
 	var $query;
 	var $where=false;
 	var $joinedTable=array();
+	var $defaultSorting=null;
 	var $formCreated="function(event,data){data.form.enterNext()}";
 	var $formSubmitting="function(event,data){}";
 	var $formClosed="function(event,data){}";
@@ -51,7 +52,7 @@ class Table{
 		}	
 		//$this->base      = \NC\base::getInstance();
 		$this->setUrl($_SERVER['REQUEST_URI']);
-		$this->setDiv("jtable-data-".$this->randString());
+		$this->setDiv("jtable-data");
 		$this->editinline = array("enable"=>false,"img"=>"");
 		$this->isdetail=false;
 		
@@ -121,7 +122,7 @@ class Table{
 		$this->getFields();
 	}	
 	function setTable($db,$t,$key='id',$detail=false){
-		$this->jtable['defaultSorting'] ="$key DESC";
+		$this->jtable['defaultSorting'] =is_null($this->defaultSorting)?"$key DESC":$this->defaultSorting;
 		if($detail):
 			$this->isdetail=true;
 			$this->action['updateAction'] = $this->action['updateAction']."&detail=null";
@@ -357,12 +358,12 @@ class Table{
 				endif;
 		endif;	
 	}
-	function joinTable($table,$child,$parent,$fields){
+	function joinTable($table,$child,$parent,$jointype="INNER",$fields=array()){
 		for($i=0;$i<count($fields);$i++){
 			$this->fields[$fields[$i]] = array("title"=>$fields[$i],"width"=>"10%","joined"=>true);
 		}
 		$this->fields[$parent]['child']=$table;
-		$this->joinedTable[$table]=array("parent"=>$parent,"child"=>$child,"fields"=>$fields);
+		$this->joinedTable[$table]=array("parent"=>$parent,"child"=>$child,"jointype"=>$jointype,"fields"=>$fields);
 	}
 	function autocomplete(){
 		$child = isset($_REQUEST['child']) ? $_REQUEST['child']:"";  
@@ -445,8 +446,8 @@ class Table{
 		$addedfield=array();
 		foreach($this->joinedTable as $key => $val){
 			$t++;
-			$join[] = " INNER JOIN ".$key." as j$t on ".$this->table.".".$val['parent']."=j$t.".$val['child'];
-			$addedfield[]="j$t.".implode(",j$t.",$val['fields']);
+			$join[] = " ".$val['jointype']." JOIN ".$key." on ".$this->table.".".$val['parent']."=".$key.".".$val['child'];
+			$addedfield[]=$key.".".implode(",$key.",$val['fields']);
 		}
 		$join = count($join)<1?"":implode("",$join);  
 		$q = "select count(*) FROM ".$this->table.$join.$where;

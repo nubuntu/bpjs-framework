@@ -4,7 +4,7 @@ namespace NC\system\db;
 class mysql {
 	private $config;
 	private $sql;
-	private $conn;
+	private $conn=NULL;
 	var $recordset;
 	var $table;
 	var $fields;
@@ -25,8 +25,11 @@ class mysql {
 		$this->sql = $q;
 	}
 	public function query($affected_rows=true){
-		$this->connect();
+		if($this->conn==NULL){
+			$this->connect();
+		}
 		if(!$result = $this->conn->query($this->sql)){
+			$this->conn==NULL;
     		die('There was an error running the query [' . $this->conn->error . ']');
 		}
 		if($affected_rows){
@@ -187,6 +190,9 @@ class mysql {
 		$q = "update ".$this->table." set ".implode(',',$row)." where ".$this->primary." = '".mysqli_real_escape_string($this->conn,$this->assign[$this->primary])."'";
 		else:
 		foreach($this->assign as $key => $value):
+			if($key==$this->primary && $this->primary==0){
+				continue;
+			}
 			$row['field'][] = $key;
 			$row['value'][] = "'".mysqli_real_escape_string($this->conn,$value)."'";
 		endforeach;

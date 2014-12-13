@@ -11,10 +11,15 @@
 		_createDateInputForField:$.hik.jtable.prototype._createDateInputForField,
 		_createTextAreaForField:$.hik.jtable.prototype._createTextAreaForField,
 		_createTextInputForField:$.hik.jtable.prototype._createTextInputForField,
-		_createPasswordInputForField:$.hik.jtable.prototype._createPasswordInputForField	
+		_createPasswordInputForField:$.hik.jtable.prototype._createPasswordInputForField,
+		_showJForm:$.hik.jtable.prototype._showJForm,
+		_addToolBarItem:$.hik.jtable.prototype._addToolBarItem,
+		_createHeaderDiv:$.hik.jtable.prototype._createHeaderDiv,	
+		_createHeader:$.hik.jtable.prototype._createHeader			
 	}
     $.extend(true, $.hik.jtable.prototype, {
 		options: {
+			view:true,
 			buttonleft:true,
 			messages:{
 				viewRecord:"Detail",
@@ -26,7 +31,22 @@
         *************************************************************************/
         _create: function () {
             base._create.apply(this, arguments);            
-        },
+        	this._createHeaderDiv();
+			this._createHeader();
+		},
+		_createHeaderDiv:function(){
+			var self=this;
+			var $headerDiv = $('<div/>').addClass('jtable-header-div');
+			self._$headerDiv=$headerDiv;
+			self._$titleDiv.after(self._$headerDiv);
+		},
+		_createHeader:function(){
+			var self=this;
+			if(self.options.header){
+				self.options.header(self);
+			}
+		},
+
         /* Creates a date input for a field.
         *************************************************************************/
         _createDateInputForField: function (field, fieldName, value) {
@@ -35,10 +55,13 @@
             if(value != undefined) {
                 $input.val(value);
             }
-            
-            var displayFormat = field.displayFormat || this.options.defaultDateFormat;
-            $input.datepicker({ dateFormat: displayFormat });
-            return $('<div />')
+			if(field.joined){
+				$input.prop("readonly",true);	
+			}else{				            
+	            var displayFormat = field.displayFormat || this.options.defaultDateFormat;
+    	        $input.datepicker({ dateFormat: displayFormat });
+			}
+			return $('<div />')
                 .addClass('jtable-input jtable-date-input')
                 .append($input);
         },
@@ -48,6 +71,9 @@
         _createTextAreaForField: function (field, fieldName, value) {
             var $textArea = $('<textarea class="' + field.inputClass + '" id="Edit-' + fieldName + '" name="' + fieldName + '"></textarea>');
 			$textArea.addClass("text ui-widget-content ui-corner-all");
+			if(field.joined){
+				$input.prop("readonly",true);	
+			}				
             if (value != undefined) {
                 $textArea.val(value);
             }
@@ -60,12 +86,36 @@
         /* Creates a standart textbox for a field.
         *************************************************************************/
         _createTextInputForField: function (field, fieldName, value) {
+			var self=this;
             var $input = $('<input class="' + field.inputClass + '" id="Edit-' + fieldName + '" type="text" name="' + fieldName + '"></input>');
 			$input.addClass("text ui-widget-content ui-corner-all");
+			if(field.joined){
+				$input.prop("readonly",true);	
+			}			
             if (value != undefined) {
                 $input.val(value);
             }
-            
+            if(field.child){
+				var child = field.child;
+				$input.change(function(){
+					var url =self.options.actions.autocompleteAction;
+					var postData = {};
+					postData["child"]=child;
+					postData["keyword"]=$(this).val();
+					$.post(url,postData,function(data){
+						var json = $.parseJSON(data);
+						if(!$.isEmptyObject(json)){
+							var $form = $input.closest('form');
+							$.each(json,function(key,value){
+								var $childinput = $form.find("input[name='"+key+"'],select[name='"+key+"']");
+								$childinput.val(value);
+							});
+						}
+
+					});
+						
+				});
+			}
             return $('<div />')
                 .addClass('jtable-input jtable-text-input')
                 .append($input);
@@ -171,14 +221,64 @@
             //Open dialog
             self._$editingRow = $tableRow;
             self._$viewDiv.append($editForm).dialog('open');
+						
         },			
+        _showJForm: function (url,width) {
+            var self = this;
+			var $link = url.indexOf("?")<1? url + "?jform-source": url + "&jform-source";
+			console.log($link);
+			width = width===undefined?750:width;
+			var obj={};
+			$.ajax({
+		         url:$link,
+		         async:false,
+        		 success: function(data) {
+					obj=eval("("+data+")");			
+                  }
+    		});        
+				var $div =$('<div/>').dialog({
+                autoOpen: false,
+                show: self.options.dialogShowEffect,
+                hide: self.options.dialogHideEffect,
+                minWidth:350,
+				height:'auto',
+				maxHeight:620,
+				width: width,
+                modal: false,
+                title: "",
+                close: function () {
+					$('input.jtable-toolbarsearch:first').change(); 
+                    $(this).dialog('destroy').remove();
+                }
+            }).dialogExtend(this._getFullOptions($div,true,url));
+			$div.jform(obj).jform("load").dialog("open");
+    			
+    				
+
+            //Create edit form
+        },		
+        _appendJForm: function ($div,url) {
+            var self = this;
+			var $link = url.indexOf("?")<1? url + "?jform-source": url + "&jform-source";
+			var obj={};
+			$.ajax({
+		         url:$link,
+		         async:false,
+        		 success: function(data) {
+					obj=eval("("+data+")");			
+                  }
+    		});        
+			$div.jform(obj).jform("load");
+    			
+        },		
+
 		/** Overrides Method
 		*****************************/
 		_addCellsToRowUsingRecord: function ($row) {
 			base._addCellsToRowUsingRecord.apply(this,arguments);
 			var self = this;
 			if(this.options.buttonleft){
-				
+				if(this.options.view){
 				var $span = $('<span></span>').html(self.options.messages.viewText);
                 var $button = $('<button title="' + self.options.messages.viewText + '" type="button" class="btn btn-primary btn-circle"><i class="fa fa-info"></i></button>')
                     
@@ -188,6 +288,8 @@
                         e.stopPropagation();
                         self._showViewForm($row);
                     });
+				//console.log(self.options.view);	
+				}
                 $('<td></td>')
                     .addClass('jtable-command-column')
                     .append($button)
@@ -202,7 +304,7 @@
 		},
         _updateRowTexts: function ($tableRow) {
 			base._updateRowTexts.apply(this,arguments);	
-			if(this.options.buttonleft){
+			if(this.options.buttonleft && this.options.view){
 			var $row = $tableRow;
 			var self = this;
 			$row.find(".jtable-command-column").each(function(){
@@ -210,6 +312,7 @@
 				$(this).removeAttr('class');
 				$row.find('td:last').remove();
 			});
+				if(this.options.view){
 				var $span = $('<span></span>').html(self.options.messages.viewText);
                 var $button = $('<button title="' + self.options.messages.viewText + '" type="button" class="btn btn-primary btn-circle"><i class="fa fa-info"></i></button>')
                     
@@ -222,7 +325,8 @@
                 $('<td></td>')
                     .addClass('jtable-command-column')
                     .append($button)
-                    .prependTo($row);  
+                    .prependTo($row);
+				}
             if (self.options.actions.updateAction != undefined) {
                 var $span = $('<span></span>').html(self.options.messages.editRecord);
                 var $button = $('<button title="' + self.options.messages.editRecord + '"></button>')
@@ -254,7 +358,75 @@
                     .prependTo($row);
             }
 			}
-		}		
+		},		
+        _addToolBarItem: function (item) {
+			var self=this;
+            //Check if item is valid
+            if ((item == undefined) || (item.text == undefined && item.icon == undefined)) {
+                this._logWarn('Can not add tool bar item since it is not valid!');
+                this._logWarn(item);
+                return null;
+            }
+
+            var $toolBarItem = $('<span></span>')
+                .addClass('jtable-toolbar-item')
+                .appendTo(this._$toolbarDiv);
+
+            this._jqueryuiThemeAddClass($toolBarItem, 'ui-widget ui-state-default ui-corner-all', 'ui-state-hover');
+
+            //cssClass property
+            if (item.cssClass) {
+                $toolBarItem
+                    .addClass(item.cssClass);
+            }
+
+            //tooltip property
+            if (item.tooltip) {
+                $toolBarItem
+                    .attr('title', item.tooltip);
+            }
+
+            //icon property
+            if (item.icon) {
+                var $icon = $('<span class="jtable-toolbar-item-icon"></span>').appendTo($toolBarItem);
+                if (item.icon === true) {
+                    //do nothing
+                } else if ($.type(item.icon === 'string')) {
+                    $icon.css('background', 'url("' + item.icon + '")');
+                }
+            }
+
+            //text property
+            if (item.text) {
+                $('<span class=""></span>')
+                    .html(item.text)
+                    .addClass('jtable-toolbar-item-text').appendTo($toolBarItem);
+            }
+
+            //click event
+            if (item.click) {
+                $toolBarItem.click(function () {
+                    item.click(self);
+                });
+            }
+
+            //set hover animation parameters
+            var hoverAnimationDuration = undefined;
+            var hoverAnimationEasing = undefined;
+            if (this.options.toolbar.hoverAnimation) {
+                hoverAnimationDuration = this.options.toolbar.hoverAnimationDuration;
+                hoverAnimationEasing = this.options.toolbar.hoverAnimationEasing;
+            }
+
+            //change class on hover
+            $toolBarItem.hover(function () {
+                $toolBarItem.addClass('jtable-toolbar-item-hover', hoverAnimationDuration, hoverAnimationEasing);
+            }, function () {
+                $toolBarItem.removeClass('jtable-toolbar-item-hover', hoverAnimationDuration, hoverAnimationEasing);
+            });
+
+            return $toolBarItem;
+        }
 	});
 	
 })(jQuery);

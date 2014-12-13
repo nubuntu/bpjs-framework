@@ -30,7 +30,8 @@ class Controller {
 	}
 	function redirect($action,$type="",$msg=""){
 		$this->setSession("redirectmsg",array('type'=>$type,'msg'=>$msg));
-		header("location:".$this->base->baseurl."/".$action);			
+		header("location:".$this->base->baseurl."/".$action);	
+		die();		
 
 	}
 	function setSession($name,$val){

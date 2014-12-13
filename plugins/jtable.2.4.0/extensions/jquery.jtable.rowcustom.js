@@ -49,13 +49,19 @@
             this._onRowUpdated($tableRow);
         },
 		_popUp:function(el){
+			var self=this;
 			var $dialog = $('<div></div>').css('overflow', 'hidden')
                .html('<iframe style="border: 0px; " src="' + el.attr("href") + '" width="100%" height="100%"></iframe>')
                .dialog({
                    autoOpen: false,
-                   height: 400,
-                   width: 800,
-                   title: el.attr("alt")
+                show: self.options.dialogShowEffect,
+                hide: self.options.dialogHideEffect,
+                minWidth:350,
+				height:600,
+				maxHeight:620,
+				width: 940,
+                modal: false,
+                   title: el.attr("alt")			
                });
 			   var option = this._getFullOptions($dialog,true);
       		$dialog.dialogExtend(option);
@@ -72,6 +78,20 @@
 				for(var i=0;i<contents.length;i++){
 					
 					var links = contents[i];
+					if(links.click){
+						var param = links.icon.split(">");
+						var func = links.click;
+						var $button = $("<button title='" + links.title + "' type='button' class='" + param[0] +"'>\
+						<i class='" + param[1] +"'></i></button>");
+						$button.click(function(){
+							func(self,record,$(this));
+						});
+					
+						var $td = $("<div/>").css({"display":"table-cell","padding-left":"5px","padding-right":"5px"})
+								.append($button).appendTo($div);
+
+						
+					}else{
 					if(links.popup){
 	        		var $txt = $('<a class="popupwindow" href="' + links.display({record:record}) + '" title="' + links.alt + '" alt="' + links.alt + '">' + links.title + '</a>');
 					$txt.popupwindow({});
@@ -91,6 +111,7 @@
 						});
 						$td.append($button);
 						$txt.hide();
+					}
 					}
 					$div.append($td);				
 				}

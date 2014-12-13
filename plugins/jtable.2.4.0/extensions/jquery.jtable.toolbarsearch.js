@@ -110,7 +110,11 @@
 			} else if (field.type == 'checkbox') {
                 return this._getDisplayCheckBox(fieldName,field);
             } else if (field.options) { //combobox or radio button list since there are options.
-                return this._getDisplayComboBox(fieldName,field);
+                if($.isFunction(field.options)){
+					return this._getDisplayText(fieldName,field);				
+				}else{
+					return this._getDisplayComboBox(fieldName,field);
+				}
             } else {
 				return this._getDisplayText(fieldName,field);
             }
@@ -132,11 +136,7 @@
 			return $input;
 		},
 		_getDisplayCheckBox:function(fieldName,field){
-			if (field.options) {
-                return this._getDisplayComboBox(fieldName,field);
-            }else{
-				return this._getDisplayText(fieldName,field);
-			}
+			return this._getDisplayText(fieldName,field);
 		},
 		_getDisplayComboBox:function(fieldName,field){
 			

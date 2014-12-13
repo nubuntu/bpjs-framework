@@ -9,7 +9,7 @@
                         <li><a href="profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo $this->base->baseurl."/site";?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo $this->base->baseurl."/user/logout";?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

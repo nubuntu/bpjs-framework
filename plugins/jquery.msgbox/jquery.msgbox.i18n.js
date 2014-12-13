@@ -21,7 +21,32 @@
 		imgError: '图片加载失败！',
 		xhrError: 'Ajax请求失败！'
 	};
-	
+	$.msgboxI18N.id_ID = {
+		OK: 'OK',
+		Cancel: 'BATAL',
+		Loading: 'Loading',
+		Next: 'Selanjutnya',
+		'Play/Pause': 'Play/Pause',
+		Prev: 'Sebelumnya',
+		Maximize: 'Maximize',
+		Minimize: '最小化',
+		Close: 'Tutup',
+		imgError: 'Gagal meampilkan gambar',
+		xhrError: 'Gagal menerima respon dari server！'
+	};	
+	$.msgboxI18N.en = {
+		OK: 'OK',
+		Cancel: 'BATAL',
+		Loading: 'Loading',
+		Next: 'Selanjutnya',
+		'Play/Pause': 'Play/Pause',
+		Prev: 'Sebelumnya',
+		Maximize: 'Maximize',
+		Minimize: '最小化',
+		Close: 'Tutup',
+		imgError: 'Gagal meampilkan gambar',
+		xhrError: 'Gagal menerima respon dari server！'
+	};	
 	// Tranditional Chinese
 	$.msgboxI18N.zh_TW = {
 		OK: '好',

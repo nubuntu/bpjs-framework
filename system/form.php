@@ -54,12 +54,19 @@ class Form{
 		}	
 		//$this->base      = \NC\base::getInstance();
 		$this->setUrl($_SERVER['REQUEST_URI']);
-		$this->setDiv("jform-data-".$this->randString());
+		$this->setDiv("jform-data-");
 		$this->editinline = array("enable"=>false,"img"=>"");
 		$this->isdetail=false;
 		
-		//$this->db = $this->base->db;
-		
+		if(isset($_REQUEST['jform-hidetitle'])){
+			$this->jform['showTitle']=false;
+		}
+		if(isset($_REQUEST['jform-hidesubmit'])){
+			$this->jform['showSubmit']=false;
+		}
+		if(isset($_REQUEST['jform-contentonly'])){
+			$this->jform['showTitle']=false;
+			$this->jform['showSubmit']=false;		}
 		
 	}
 	function randString($length = 10) {
@@ -80,12 +87,14 @@ class Form{
 		$delete = $url. $mark."jform-action=delete";
 		$ac = $url. $mark."jform-action=autocomplete";
 		$as = $url. $mark."jform-action=autosuggest";
+		$aselect = $url. $mark."jform-action=autoselect";
 		$this->action['listAction'] = $action;
 		$this->action['createAction'] = $create;
 		$this->action['updateAction']=$update;
 		$this->action['deleteAction']=$delete;
 		$this->action['autocompleteAction']=$ac;		
 		$this->action['autosuggestAction']=$as;		
+		$this->action['autoselectAction']=$aselect;		
 	}
 	function setManual($url){
 		$mark =strpos($url,"?") ? "&" : "?";
@@ -286,7 +295,6 @@ class Form{
 		$this->fields['record_number'] = array(
                     "title"=>'#',
                     "width"=>'small',
-					"list"=>false,
                     "edit"=>false,
                     "create"=>false,					
 					"sorting"=>false,
@@ -359,6 +367,14 @@ class Form{
 				if(method_exists($this,$action)):
 					$this->$action();
 				endif;
+		else:
+		if(isset($_REQUEST['jform-source'])):
+			$obj = str_replace(";
+		$('.jform-data-').jform(obj);
+			$('.jform-data-').jform('load');","",$this->render());
+			$obj = str_replace("var obj =","",$obj);
+			die($obj);
+		endif;				
 		endif;	
 	}
 	function joinTable($table,$child,$parent,$fields){
@@ -377,6 +393,18 @@ class Form{
 		$row = $this->db->getRow();
 		die(json_encode($row));
 	}
+	function autoselect(){
+		$field = isset($_REQUEST['field']) ? $_REQUEST['field']:"";
+		if($field==""){
+			die(json_encode(array()));
+		}else{
+			$options = $this->fields[$field]['options'];
+			$q = "select ".$options['value']." as value,".$options['text']." as text from ".$options['table']." order by ".$options['text'];
+			$this->db->setQuery($q);
+			$rows['data'] = $this->db->getRows();
+			die(json_encode($rows));
+		}
+	}
 	function setSuggest($field,$param){
 		$this->fields[$field]['suggest']=$param;
 		$this->suggest[$field]=$param;
@@ -384,14 +412,23 @@ class Form{
 	function autosuggest(){
 		$field = isset($_REQUEST['field']) ? $_REQUEST['field']:"";
 		$keyword = isset($_REQUEST['keyword']) ? $_REQUEST['keyword']:"";
+		$single = isset($_REQUEST['single']) ? true:false;
 		$suggest = $this->suggest[$field];
 		$added="";
 		if(isset($suggest['added'])){
 			$added = ",".implode(",",$suggest['added']);
 		}
+		if($single){
+		
+		$q = "select ".$suggest['value']." as id,".$suggest['display']." as value". $added." from ".$suggest['table']." where LOWER(".$suggest['value'].")='".strtolower($keyword)."'";
+		$this->db->setQuery($q);
+		$rows = $this->db->getRow();
+		}else{
 		$q = "select ".$suggest['value']." as id,".$suggest['display']." as value". $added." from ".$suggest['table']." where LOWER(".$suggest['value'].") like '%".strtolower($keyword)."%' or LOWER(".$suggest['display'].") like '%".strtolower($keyword)."%' order by ".$suggest['value']." desc limit 0,10 ";
 		$this->db->setQuery($q);
 		$rows = $this->db->getRows();
+		
+		}
 		die(json_encode($rows));		
 
 	}
@@ -817,7 +854,19 @@ var obj$parent = ".$this->json_encok($table).";
 	function fieldCustom($field,$param){
 		$this->fields[$field] = array_merge($this->fields[$field],$param);
 	}
+	
 	function moveAfter($fieldname,$target){
+		if(is_array($fieldname)){
+			$before=$target;
+			for($i=0;$i<count($fieldname);$i++){
+				$this->move($fieldname[$i],$before);
+				$before=$fieldname[$i];
+			}
+		}else{
+			$this->move($fieldname,$target);
+		}
+	}
+	function move($fieldname,$target){
 		$field = $this->fields[$fieldname];
 		$arr = array();
 		foreach($this->fields as $key => $val){
