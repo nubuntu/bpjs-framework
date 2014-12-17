@@ -16,18 +16,24 @@ class SiteController extends system\Controller {
 		$row = $db->getRow();
 		if($row){
 			$this->setSession("user",$row);
-			echo $q = "select a.*,d.nama,d.link,d.style from group_menu as a inner join user_groups as b on a.group_id=b.id 
-			inner join user as c on b.user_id=c.id inner join menu as d on a.menu_id=d.id where md5(c.id)='" .md5($row->id)."'
+			$q = "SELECT a.*, d.nama, d.link, d.style FROM group_menu AS a INNER JOIN user_groups AS b ON a.group_id = b.group_id INNER JOIN `user` AS c ON b.user_id = c.id INNER JOIN menu AS d ON a.menu_id = d.id where md5(c.id)='" .md5($row->id)."'
 			 and published=1 order by a.ordering";
 			$db->setQuery($q);
-			if($rows=$db->getRows()){
-				$this->setSession("menu",$rows);
+			$rows=$db->getRows();
+			if($rows){
+				//$this->setSession("menu",$rows);
+			}else{
+				$this->redirect('user/index','error','Login Gagal, Anda tidak tergabung dalam divisi manapun, silahkan hubungi Administrator!!');
+				
 			}
-			$q = "select a.*,d.nama from group_akses as a inner join user_groups as b on a.group_id=b.id 
-			inner join user as c on b.user_id=c.id inner join akses as d on a.akses_id=d.id where md5(c.id)='" .md5($row->id)."'";
+			$q = "SELECT c.id, d.nama FROM group_akses AS a INNER JOIN user_groups ON a.group_id = user_groups.group_id INNER JOIN `user` AS c ON user_groups.user_id = c.id INNER JOIN akses AS d ON a.akses_id = d.id where md5(c.id)='" .md5($row->id)."'";
 			$db->setQuery($q);
-			if($rows=$db->getRows()){
-				$this->setSession("akses",$rows);
+			$rows=$db->getRows();
+			if($rows){
+				//$this->setSession("akses",$rows);
+			}else{
+				$this->redirect('site/index','error','Login Gagal, Anda tidak memiliki akses sama sekali, silahkan hubungi Administrator!!');
+				
 			}
 			$this->redirect('site/home');
 		}else{

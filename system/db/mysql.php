@@ -23,6 +23,7 @@ class mysql {
 	}
 	public function setQuery($q){
 		$this->sql = $q;
+		return $this;
 	}
 	public function query($affected_rows=true){
 		if($this->conn==NULL){
@@ -37,6 +38,9 @@ class mysql {
 		}else{
 			return $result;
 		}
+	}
+	public function execute($q){
+		return $this->setQuery($q)->query();
 	}
 	public function getResult(){
 		$res = $this->query(false);
@@ -211,6 +215,11 @@ class mysql {
 		return $this->conn->insert_id;
 	}
 	function lookUp($field,$table,$where){
+		$q = "select ".$field." as result from ".$table." where ".$where;
+		$this->setQuery($q);
+		return $this->loadResult();	
+	}
+	function DLookup($field,$table,$where){
 		$q = "select ".$field." as result from ".$table." where ".$where;
 		$this->setQuery($q);
 		return $this->loadResult();	

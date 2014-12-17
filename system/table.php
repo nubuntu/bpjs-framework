@@ -34,7 +34,10 @@ class Table{
 	var $query;
 	var $where=false;
 	var $joinedTable=array();
+	var $footers=array();
+	var $groupBy=null;
 	var $defaultSorting=null;
+	var $autoload=true;
 	var $formCreated="function(event,data){data.form.enterNext()}";
 	var $formSubmitting="function(event,data){}";
 	var $formClosed="function(event,data){}";
@@ -46,13 +49,14 @@ class Table{
 		endif;
 		return $instance;			
 	}
-	function __construct(){
+	function __construct($divid=null){
 		if(!isset($_SESSION)) {
     		 session_start();
-		}	
+		}
+		$div = is_null($divid) ? 'jtable-data' : $divid; 
 		//$this->base      = \NC\base::getInstance();
 		$this->setUrl($_SERVER['REQUEST_URI']);
-		$this->setDiv("jtable-data");
+		$this->setDiv($div);
 		$this->editinline = array("enable"=>false,"img"=>"");
 		$this->isdetail=false;
 		
@@ -82,6 +86,7 @@ class Table{
 		$this->action['updateAction']=$update;
 		$this->action['deleteAction']=$delete;
 		$this->action['autocompleteAction']=$ac;		
+		$this->action['spreadsheet']['createAction']=$url. $mark."action=spreadsheet_create";		
 	}
 	function setManual($url){
 		$mark =strpos($url,"?") ? "&" : "?";
@@ -143,7 +148,7 @@ class Table{
 		$this->jtable['toolbarsearch'] =$this->toolbarsearch;
 		$this->jtable['toolbarleft'] =$this->toolbarleft;
 		$this->jtable['maxtext'] =$this->maxtext;
-		$this->jtable['view']=true;
+		$this->jtable['view']=false;
 		$this->jtable['formCreated']=$this->formCreated;
 		$this->jtable['formSubmitting']=$this->formCreated;
 		$this->jtable['formClosed']=$this->formClosed;
@@ -231,8 +236,10 @@ class Table{
         //Load all records when page is first shown
         $('#LoadRecordsButton').click();";
 		else:
+			if($this->autoload){
             $html.="
-			$('.".$this->div."').jtable('load');";		
+			$('.".$this->div."').jtable('load');";
+			}
 		endif;
 		return $html;
 	}
@@ -286,14 +293,16 @@ class Table{
                     "create"=>false,					
 					"sorting"=>false,
 					"type"=>"text",
-					"searchable"=>false);
+					"searchable"=>false,
+					"editable"=>false);
 		$this->fields[$this->db->primary] = array(
 					"title"=>"ID",
 					"width"=>'2%',
                     "key"=>true,
                     "edit"=>false,
                     "create"=>false,
-                    "list"=>false
+                    "list"=>false,
+					"editable"=>false
                 );
 		if($this->showkey){			
 			$this->fields[$this->db->primary]['list']=true;
@@ -338,12 +347,9 @@ class Table{
 	}
 	function pushFields($rows){
 		foreach($rows as $key => $val){
+			$val['type']=isset($val['type'])?$val['type']:"text";
 			if($key!=$this->db->primary):
-				if($val=='date'):
-				$this->fields[$key] = array("title"=>$key,"width"=>"10%","type"=>"date");
-				else:				
-				$this->fields[$key] = array("title"=>$key,"width"=>"10%");
-				endif;
+				$this->fields[$key] = $val;
 			endif;
 		}	
 	}
@@ -400,7 +406,7 @@ class Table{
 					$fld="t$i.".$option['field'];
 					$join[] = " INNER JOIN ".$option['table']." as t$i on ".$this->table.".".$option['depend']."=t$i.".$option['depends'];
 				}
-				$where[] = $fld." like '%".$q[$i]."%'";
+				$where[] = $fld." ".$this->getOperator($q[$i],$fld);
 			endfor;
 			$where = $this->where ? " where ".$this->where." And ".implode(" And ",$where) : " where ".implode(" And ",$where);
 		}else{
@@ -411,12 +417,53 @@ class Table{
 		$this->db->setQuery($q);
 		$total= $this->db->loadResult();
 		$q = "SELECT * FROM ".$this->table.$join.$where." order by ".$sort;  
-		$items = $this->db->getList($q,$offset,$rows);	
+		$items = $this->db->getList($q,$offset,$rows);
 		$jTableResult = array();
 		$jTableResult['Result'] = "OK";
 		$jTableResult['Records'] = $items;
 		$jTableResult['TotalRecordCount'] = $total;
+		if(count($this->footers)>=1){
+			$foot=array();
+			foreach($this->footers as $key => $val){
+				$foot[]=$val."(".$key.") as ".$key."_foot";
+			}
+			$q = "SELECT ".implode(",",$foot)." from ".$this->table.$join.$where." group by ".$this->groupBy;
+			$this->db->setQuery($q);
+			$jTableResult['Footer']=$this->db->getRow(); 
+		}
 		die(json_encode($jTableResult));
+	}
+	function getOperator($q,$field){
+		$opr = "like '%".$q."%'";
+		if(strpos($q,"=")!==false){
+			$q = str_replace("=","",$q);
+			$opr="='$q'";
+		}elseif(strpos($q,"<>")!==false){
+			$q = str_replace("<>","",$q);
+			$opr="='$q'";
+		}elseif(strpos($q,">=")!==false){
+			$q = str_replace(">=","",$q);
+			$opr="='$q'";
+		}elseif(strpos($q,"<=")!==false){
+			$q = str_replace("<=","",$q);
+			$opr="='$q'";
+		}elseif(strpos($q,"between")!==false){
+			$q = strtolower(str_replace("between","",$q));
+			$q = explode("and",$q);
+			$opr="between '".$q."' and '".$q."'";
+		}elseif(strpos($q,":in")!==false){
+			$q = str_replace(":in(","",trim($q));
+			$q = str_replace(")","",$q);
+			$q = explode(",",$q);
+			$opr="in ('".implode(",",$q)."')";
+		}elseif(strpos($q,":notnull")!==false){
+			$opr="is not null or $field<>''";
+		}elseif(strpos($q,":notnull")!==false){
+			$opr="is null or $field=''";
+		}elseif(strpos($q,"%")!==false){
+			$opr="like '$q'";
+		}		
+		return $opr;
 	}
 	function dataJoin(){
 		$offset = isset($_REQUEST['jtStartIndex']) ? $_REQUEST['jtStartIndex']:0;  
@@ -428,7 +475,13 @@ class Table{
 		$join = array();
 		$where ='';
 		$t=0;
-		
+		$joinfields=array();
+		foreach($this->joinedTable as $key => $val){
+			$joinedfields= $val['fields'];
+			for($z=1;$z<count($joinedfields);$z++){
+				$joinfields[$joinedfields[$z]]=$key.".".$joinedfields[$z];
+			}
+		}		
 		if($q){
 			for($i = 0; $i < count($opt); $i++):  
 				$fld = $opt[$i];
@@ -437,7 +490,11 @@ class Table{
 					$fld="t$i.".$option['field'];
 					$join[] = " INNER JOIN ".$option['table']." as t$i on ".$this->table.".".$option['depend']."=t$i.".$option['depends'];
 				}
-				$where[] = $fld." like '%".$q[$i]."%'";
+				if(isset($joinfields[$fld])){
+					$where[] = $joinfields[$fld]." ".$this->getOperator($q[$i],$joinfields[$fld]);
+				}else{
+					$where[] = $this->table.".".$fld." ".$this->getOperator($q[$i],$fld);
+				}
 			endfor;
 			$where = $this->where ? " where ".$this->where." And ".implode(" And ",$where) : " where ".implode(" And ",$where);
 		}else{
@@ -459,6 +516,15 @@ class Table{
 		$jTableResult['Result'] = "OK";
 		$jTableResult['Records'] = $items;
 		$jTableResult['TotalRecordCount'] = $total;
+		if(count($this->footers)>=1){
+			$foot=array();
+			foreach($this->footers as $key => $val){
+				$foot[]=$val."(".$key.") as ".$key."_foot";
+			}
+			$q = "SELECT ".implode(",",$foot)." from ".$this->table.$join.$where." group by ".$this->groupBy;
+			$this->db->setQuery($q);
+			$jTableResult['Footer']=$this->db->getRow(); 
+		}
 		die(json_encode($jTableResult));
 	}
 	function datadetail(){
@@ -493,6 +559,16 @@ class Table{
 		$log['key'] = $this->db->primary;
 		$log['data'] = $post;
 		die(json_encode($jTableResult));						
+	}
+	function spreadsheet_create(){
+		$post =  $_REQUEST;
+		$records = isset($post['records'])?json_decode($post['records']):array();
+		foreach($records as $record){
+			print_r($record);
+			$this->db->bind((array)$record);
+			$this->db->store();
+		}
+		die();
 	}
 	function update(){
 		$post =  $_REQUEST;
@@ -832,6 +908,13 @@ var obj$parent = ".$this->json_encok($table).";
 			}
 			$this->fields[$key] = $val;
 		}
+	}
+	function setFooter($field,$type="sum"){
+		$this->jtable['footer']=true;
+		$this->footers[$field]=$type;
+		$this->fields[$field]['footer']="function(data,el){
+				el.html(data.Footer.".$field."_foot);
+			}";
 	}
 	function setAkses($app,$tbl=""){
 		if($tbl==""){

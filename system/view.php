@@ -40,8 +40,9 @@ class View {
 		$this->addScript('plugins/jtable.2.4.0/extensions/jquery.jtable.editinline.js');	
 		$this->addScript('plugins/jtable.2.4.0/extensions/jquery.jtable.rowcustom.js');
 		$this->addScript('plugins/jtable.2.4.0/extensions/jquery.jtable.buttonleft.js');
-		//$this->addScript('plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js');
-		//$this->addScript('plugins/jquery-validation-1.13.1/dist/jquery.validate.min.js');
+		$this->addScript('plugins/jtable.2.4.0/extensions/jquery.jtable.spreadsheet.js');
+		$this->addScript('plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js');
+		$this->addScript('plugins/jquery-validation-1.13.1/dist/jquery.validate.min.js');
 		$this->addScript('script/custom.js');
 		//$this->addStyle('plugins/jquery-ui-bootstrap/jquery.ui.theme.css');
 		$this->addStyle('plugins/jquery-ui-1.11.2/jquery-ui.min.css');
@@ -186,7 +187,13 @@ class View {
 		return $this->base->getCookie($name);	
 	}
 	function prepareMenu(){
-		$this->menu = $this->getSession("menu");
+		$db = $this->base->db;
+		$user = $this->getSession("user");
+		$q = "SELECT a.*, d.nama, d.link, d.style FROM group_menu AS a INNER JOIN user_groups AS b ON a.group_id = b.group_id INNER JOIN `user` AS c ON b.user_id = c.id INNER JOIN menu AS d ON a.menu_id = d.id where md5(c.id)='" .md5($user->id)."'
+			 and a.published=1 order by a.ordering";
+		$db->setQuery($q);
+		$rows=$db->getRows();
+		$this->menu = $rows;
 	}
 	function getMenu($parent=false){
 		$rows=array();
